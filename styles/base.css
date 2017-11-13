@@ -1,10 +1,73 @@
-@import url("https://fonts.googleapis.com/css?family=Raleway");
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  line-height: 1.5em;
+  border: solid 1px black;
+  margin-bottom:.8em;
 }
+
+div, nav{
+  border: solid 1px black;
+}
+
+nav {
+  margin-bottom: 2em;
+}
+
+.main-div {
+  width:85%;
+  margin: 2em auto;
+  padding: 1.3em;
+}
+
+.search-box {
+  text-align: center;
+}
+
+.icon-menu{
+  display:inline;
+  float: right;
+}
+
+nav li {
+  display: inline-block;
+  margin: 0.5em;
+  font-size: 1.7em;
+}
+
+h1 {
+  font-size: 1.5em;
+  text-align: center;
+}
+
+h2, h3{
+  font-size: 1.5em;
+  margin: .4em;
+}
+
+.main-div h3{
+  text-decoration: underline;
+}
+
+.main-div ul {
+  font-size:1.3em;
+  line-height: 1.2em;
+  margin-left: .5em;
+}
+
+.main-div li {
+  font-size: 0.7em;
+  list-style: square;
+  margin-left: 1.2em;
+}
+
+
+#recipe-results {
+  text-align: left;
+  padding:.7em;
+}
+
 
 .clearfix::after {
   content: "";
