@@ -18,6 +18,36 @@
     <div class="space"></div>
   </script>
 
+  <script id="recipe-template" type="text/x-handlebars-template">
+    <div id="recipe-results">
+      {{#with recipe}}
+        <h3><a href="{{source_url}}">{{title}}</a></h3>
+        <img src="{{image_url}}">
+      {{/with}}
+        <ul>Ingredients
+        {{#each this}}
+          {{#ingredients}}
+          <li>{{this}}</li>
+          {{/ingredients}}
+        {{/each}}
+        </ul>
+    </div>
+  </script>
+
+  <script id="my-recipe-template" type="text/x-handlebars-template">
+    <div id="my-recipe-results">
+        <h3><a href="{{source_url}}">{{title}}</a></h3>
+        <img src="{{image_url}}">
+        <ul>Ingredients
+        {{#each this}}
+          {{#ingredients}}
+          <li>{{this}}</li>
+          {{/ingredients}}
+        {{/each}}
+        </ul>
+    </div>
+  </script>
+
   <nav class="main-nav">
 
     <h1>ROASTful</h1>
@@ -42,25 +72,13 @@
     </div>
 
     <!-- append recipes to this div -->
-    <div id="recipe-results">
-        <h3>Peanut Butter Sandwich</h2>
-        <ul>Ingredients
-          <li>Bread 2 slices</li>
-          <li>Peanut Butter</li>
-        </ul>
-        <ul>Directions
-        <li>Lay out the bread</li>
-        <li>Spread on Peanut Butter</li>
-        <li>Put slices of bread together, peanut buttered sides touching</li>
-        </ul>
-    </div>
-  </div>
+    <div id="recipe-results"></div>
 
   <div id="pantry-main" class="main-div clearfix container">
-    <h2>Pantry</h2>
 
     <!-- append recipes to this div -->
     <div id="ingredient-list">
+      <h2>Pantry</h2>
         <ul>
           <li><input type="checkbox">Bread 2 slices</li>
           <li><input type="checkbox">Peanut Butter</li>
@@ -72,20 +90,10 @@
   </div>
 
   <div id="recipe-main" class="main-div clearfix container">
-    <h2>My Recipes</h2>
 
     <!-- append recipes to this div -->
     <div id="recipe-list">
-        <h3>Peanut Butter Sandwich</h2>
-        <ul>Ingredients
-          <li>Bread 2 slices</li>
-          <li>Peanut Butter</li>
-        </ul>
-        <ul>Directions
-        <li>Lay out the bread</li>
-        <li>Spread on Peanut Butter</li>
-        <li>Put slices of bread together, peanut buttered sides touching</li>
-        </ul>
+      <h2>My Recipes</h2>
     </div>
       <footer>
       </footer>
