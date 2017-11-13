@@ -1,0 +1,16 @@
+#error-main {
+  padding: 0 2em 2em 2em;
+}
+
+#error-main h2 {
+  margin: 2.5em 0 1em 0;
+}
+
+#error-main h3 {
+  font-style: italic;
+  margin: 1em 0;
+}
+
+#error-main p {
+  font-weight: 900;
+}
