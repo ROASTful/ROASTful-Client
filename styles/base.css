@@ -3,24 +3,37 @@
   padding: 0;
   box-sizing: border-box;
   line-height: 1.5em;
-  border: solid 1px black;
   margin-bottom:.8em;
 }
 
-div, nav{
-  border: solid 1px black;
+body {
+  background: #f8f8f8;
+}
+
+div, nav {
+  /*border: solid 1px black;*/
 }
 
 nav {
   margin-bottom: 2em;
+  background: #f7c331;
 }
+
 
 .main-div {
   width:85%;
   margin: 2em auto;
   padding: 1.3em;
+  background-color: #687a8f;
 }
 
+.main-div div{
+  background: #f8f8f8;
+}
+
+.search-box {
+  background: #af473c;
+}
 .search-box {
   text-align: center;
 }
@@ -37,8 +50,13 @@ nav li {
 }
 
 h1 {
-  font-size: 1.5em;
+  font-size: 3.3em;
   text-align: center;
+  padding:.5em;
+}
+
+h2 {
+  text-align: center
 }
 
 h2, h3{
@@ -58,10 +76,13 @@ h2, h3{
 
 .main-div li {
   font-size: 0.7em;
-  list-style: square;
   margin-left: 1.2em;
 }
 
+a {
+  text-decoration: none;
+  color: #f7882f;
+}
 
 #recipe-results {
   text-align: left;
