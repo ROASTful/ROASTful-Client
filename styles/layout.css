@@ -47,9 +47,15 @@
   border: #F7C331 outset 2px;
 }
 
+
 #login #userPop, #login #passwordPop {
   margin-right: 15%;
   text-align: right;
   font-size: 3vw;
   color: #aa0000;
+}
+
+#full-ingredient-search {
+  width: 100%;
+  text-align: center;
 }
