@@ -18,6 +18,18 @@
     <div class="space"></div>
   </script>
 
+  <header>
+    <nav class="main-nav">
+      <h1>ROASTful</h1>
+      <div class="icon-menu"></div>
+      <ul>
+        <li class="tab" data-content="login"><a href="/login"> Login/Register</a></li>
+        <li class="tab" data-content="search"><a href="/"> Search Recipes</a></li>
+        <li class="tab admin" data-content="viewrecipelist"><a href="/user/recipes">My Recipes</a></li>
+        <li class="tab admin" data-content="viewpantry"><a href="/user/pantry">My Pantry</a></li>
+      </ul>
+    </nav>
+    
   <script id="recipe-template" type="text/x-handlebars-template">
       {{#with recipe}}
         <h3><a href="{{source_url}}">{{title}}</a></h3>
@@ -44,19 +56,14 @@
         </ul>
   </script>
 
-  <nav class="main-nav">
 
-    <h1>ROASTful</h1>
+    <section id="login">
+      <input id="username" type="text" name="user" placeholder="Username">
+      <input id="password" type="password" name="pass" placeholder="Password">
 
-    <div class="icon-menu"></div>
-
-    <ul>
-      <li class="tab" data-content="login"><a href="/login"> Login/Register</a></li>
-      <li class="tab" data-content="search"><a href="/"> Search Recipes</a></li>
-      <li class="tab admin" data-content="viewrecipelist"><a href="/user/recipes">My Recipes</a></li>
-      <li class="tab admin" data-content="viewpantry"><a href="/user/pantry">My Pantry</a></li>
-    </ul>
-  </nav>
+      <button type="button" name="login">LOGIN</button>
+    </section>
+</header>
 
   <div id="search-main" class="main-div clearfix container">
     <div class="search-box">
