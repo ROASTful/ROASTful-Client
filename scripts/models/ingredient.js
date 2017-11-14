@@ -20,7 +20,7 @@ Recipe.loadAll = rawData => {
 }
 
 Recipe.search = callback => {
-  $.get(``)
+  $.get(`/recipes/ingredient/search/${}`)
   .then(results => {
     Recipe.loadAll(results);
   })
