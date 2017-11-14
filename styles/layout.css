@@ -28,7 +28,7 @@
   width: 70%;
   color: #550000;
   font-size: 6vw;
-  margin: 0 0 4vw;
+  margin: 0;
   border-bottom-right-radius: 2vw;
   border-bottom-left-radius: 2vw;
   padding-left: 2vw;
@@ -41,7 +41,15 @@
   display: block;
   padding: 2vw 8vw;
   margin: 0 auto;
+  margin-top: 4vw;
   background: linear-gradient(#6B7A8F, #DCC7AA 120%);
   color: white;
   border: #F7C331 outset 2px;
+}
+
+#login #userPop, #login #passwordPop {
+  margin-right: 15%;
+  text-align: right;
+  font-size: 3vw;
+  color: #aa0000;
 }
