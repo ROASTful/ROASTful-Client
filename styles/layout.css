@@ -1,0 +1,46 @@
+#login {
+  border: #6B7A8F groove 2px;
+  position: absolute;
+  background-color: #F7882F;
+  width: 100%;
+  padding: 50px 10px;
+  overflow: auto;
+  text-align: center;
+  box-shadow: 0px 5px 5px black;
+}
+
+#username {
+  border: #F7C331 inset 2px;
+  background: linear-gradient(#DCC7AA, #fff);
+  width: 70%;
+  font-size: 6vw;
+  margin: 0;
+  border-top-right-radius: 2vw;
+  border-top-left-radius: 2vw;
+  border-bottom: 0;
+  padding-left: 2vw;
+}
+
+#password {
+  border: #F7C331 inset 2px;
+  background: linear-gradient(#DCC7AA, #fff);
+  width: 70%;
+  color: red;
+  font-size: 6vw;
+  margin: 0 0 4vw;
+  border-bottom-right-radius: 2vw;
+  border-bottom-left-radius: 2vw;
+  padding-left: 2vw;
+}
+
+#login button {
+  width: 70%;
+  border-radius: 2vw;
+  font-size: 5vw;
+  display: block;
+  padding: 2vw 8vw;
+  margin: 0 auto;
+  background: linear-gradient(#6B7A8F, #DCC7AA 120%);
+  color: white;
+  border: #F7C331 outset 2px;
+}
