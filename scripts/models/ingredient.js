@@ -38,7 +38,6 @@ Recipe.buildSearch = () => {
   })
 }
 
-
 Recipe.search = ingredients => {
   $.get(`${__API_URL__}/recipes/${ingredients}`)
     .then(results => {
