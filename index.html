@@ -19,7 +19,6 @@
   </script>
 
   <script id="recipe-template" type="text/x-handlebars-template">
-    <div id="recipe-results">
       {{#with recipe}}
         <h3><a href="{{source_url}}">{{title}}</a></h3>
         <img src="{{image_url}}">
@@ -31,12 +30,10 @@
           {{/ingredients}}
         {{/each}}
         </ul>
-    </div>
   </script>
 
   <script id="my-recipe-template" type="text/x-handlebars-template">
-    <div id="my-recipe-results">
-        <h3><a href="{{source_url}}">{{title}}</a></h3>
+    <h3><a href="{{source_url}}">{{title}}</a></h3>
         <img src="{{image_url}}">
         <ul>Ingredients
         {{#each this}}
@@ -45,7 +42,6 @@
           {{/ingredients}}
         {{/each}}
         </ul>
-    </div>
   </script>
 
   <nav class="main-nav">
@@ -72,9 +68,26 @@
     </div>
 
     <!-- append recipes to this div -->
-    <div id="recipe-results"></div>
+
+    <div id="recipe-results"></div> 
+
+   <!-- <div id="recipe-results">
+        <h3>Peanut Butter Sandwich</h3>
+        <ul>Ingredients
+          <li>Bread 2 slices</li>
+          <li>Peanut Butter</li>
+        </ul>
+        <ul>Directions
+        <li>Lay out the bread</li>
+        <li>Spread on Peanut Butter</li>
+        <li>Put slices of bread together, peanut buttered sides touching</li>
+        </ul>
+    </div>
+  </div>-->
 
   <div id="pantry-main" class="main-div clearfix container">
+
+
 
     <!-- append recipes to this div -->
     <div id="ingredient-list">
@@ -94,6 +107,17 @@
     <!-- append recipes to this div -->
     <div id="recipe-list">
       <h2>My Recipes</h2>
+          <!--<h3>Peanut Butter Sandwich</h2>
+        <ul>Ingredients
+          <li>Bread 2 slices</li>
+          <li>Peanut Butter</li>
+        </ul>
+        <ul>Directions
+        <li>Lay out the bread</li>
+        <li>Spread on Peanut Butter</li>
+        <li>Put slices of bread together, peanut buttered sides touching</li>
+        </ul>-->
+
     </div>
       <footer>
       </footer>
