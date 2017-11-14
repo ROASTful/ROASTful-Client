@@ -29,6 +29,33 @@
         <li class="tab admin" data-content="viewpantry"><a href="/user/pantry">My Pantry</a></li>
       </ul>
     </nav>
+    
+  <script id="recipe-template" type="text/x-handlebars-template">
+      {{#with recipe}}
+        <h3><a href="{{source_url}}">{{title}}</a></h3>
+        <img src="{{image_url}}">
+      {{/with}}
+        <ul>Ingredients
+        {{#each this}}
+          {{#ingredients}}
+          <li>{{this}}</li>
+          {{/ingredients}}
+        {{/each}}
+        </ul>
+  </script>
+
+  <script id="my-recipe-template" type="text/x-handlebars-template">
+    <h3><a href="{{source_url}}">{{title}}</a></h3>
+        <img src="{{image_url}}">
+        <ul>Ingredients
+        {{#each this}}
+          {{#ingredients}}
+          <li>{{this}}</li>
+          {{/ingredients}}
+        {{/each}}
+        </ul>
+  </script>
+
 
     <section id="login">
       <input id="username" type="text" name="user" placeholder="Username">
@@ -48,8 +75,11 @@
     </div>
 
     <!-- append recipes to this div -->
-    <div id="recipe-results">
-        <h3>Peanut Butter Sandwich</h2>
+
+    <div id="recipe-results"></div>
+
+   <!-- <div id="recipe-results">
+        <h3>Peanut Butter Sandwich</h3>
         <ul>Ingredients
           <li>Bread 2 slices</li>
           <li>Peanut Butter</li>
@@ -60,13 +90,15 @@
         <li>Put slices of bread together, peanut buttered sides touching</li>
         </ul>
     </div>
-  </div>
+  </div>-->
 
   <div id="pantry-main" class="main-div clearfix container">
-    <h2>Pantry</h2>
+
+
 
     <!-- append recipes to this div -->
     <div id="ingredient-list">
+      <h2>Pantry</h2>
         <ul>
           <li><input type="checkbox">Bread 2 slices</li>
           <li><input type="checkbox">Peanut Butter</li>
@@ -78,11 +110,13 @@
   </div>
 
   <div id="recipe-main" class="main-div clearfix container">
-    <h2>My Recipes</h2>
 
     <!-- append recipes to this div -->
+
     <div id="recipe-list">
-        <h3>Peanut Butter Sandwich</h2>
+      <h2>My Recipes</h2>
+
+          <!--<h3>Peanut Butter Sandwich</h2>
         <ul>Ingredients
           <li>Bread 2 slices</li>
           <li>Peanut Butter</li>
@@ -91,8 +125,10 @@
         <li>Lay out the bread</li>
         <li>Spread on Peanut Butter</li>
         <li>Put slices of bread together, peanut buttered sides touching</li>
-        </ul>
+        </ul>-->
+
     </div>
+  </div>
       <footer>
       </footer>
 
