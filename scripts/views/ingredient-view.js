@@ -14,5 +14,9 @@ var recipe = {"recipe":
 };
 
 let template = Handlebars.compile($('#recipe-template').html());
+let myRecipies = Handlebars.compile($('#my-recipe-template').html());
+let myPantry = Handlebars.compile($('#pantry-template').html());
 
 $('#recipe-results').append(template(recipe));
+$('#recipe-list').append(myRecipies(recipe));
+$('#ingredient-list').append(myPantry(recipe));
