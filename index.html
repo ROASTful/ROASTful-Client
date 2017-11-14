@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="styles/modules.css">
   </head>
 
-<body>
   <script id="error-template" type="text/x-handlebars-template">
     <h3>Oops, something went wrong!</h3>
     <p>{{error}}.</p>
@@ -55,19 +54,29 @@
     </ul>
   </script>
 
-  <nav class="main-nav">
+<body>
 
-    <h1>ROASTful</h1>
+  <header>
+    <!-- nav menu -->
+    <nav class="main-nav">
+      <h1>ROASTful</h1>
+      <div class="icon-menu"></div>
+      <ul>
+        <li class="tab" data-content="login"><a href="/login"> Login/Register</a></li>
+        <li class="tab" data-content="search"><a href="/"> Search Recipes</a></li>
+        <li class="tab admin" data-content="viewrecipelist"><a href="/user/recipes">My Recipes</a></li>
+        <li class="tab admin" data-content="viewpantry"><a href="/user/pantry">My Pantry</a></li>
+      </ul>
+    </nav>
 
-    <div class="icon-menu"></div>
+    <!-- login box -->
+    <section id="login">
+      <input id="username" type="text" name="user" placeholder="Username">
+      <input id="password" type="password" name="pass" placeholder="Password">
+      <button type="button" name="login">LOGIN</button>
+    </section>
 
-    <ul>
-      <li class="tab" data-content="login"><a href="/login"> Login/Register</a></li>
-      <li class="tab" data-content="search"><a href="/"> Search Recipes</a></li>
-      <li class="tab admin" data-content="viewrecipelist"><a href="/user/recipes">My Recipes</a></li>
-      <li class="tab admin" data-content="viewpantry"><a href="/user/pantry">My Pantry</a></li>
-    </ul>
-  </nav>
+  </header>
 
   <div id="search-main" class="main-div clearfix container">
     <div class="search-box">
