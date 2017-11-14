@@ -5,8 +5,8 @@ var __API_URL__ = 'https://roastful.herokuapp.com';
 // var __API_URL__ = 'http://localhost:3000';
 
 function Recipe(rawDataObj) {
-    Object.keys(rawDataObj).forEach(key => this[key] = rawDataObj[key]);
-  };
+  Object.keys(rawDataObj).forEach(key => this[key] = rawDataObj[key]);
+}
 
 Recipe.all = [];
 Recipe.ingredientSearch = [];
@@ -24,24 +24,30 @@ Recipe.loadAll = rawData => {
 Recipe.buildSearch = () => {
   $('#addIngredient').click(function(event) {
     event.preventDefault();
-    Recipe.builtSearch = Recipe.ingredientSearch.push($('#ingredient').val().replace(/\s+/g, '%20'));
+    Recipe.ingredientSearch.push($('#ingredient').val().replace(/\s+/g, '%20'));
     $('#export-field').show();
+    $('#full-ingredient-search').val(Recipe.ingredientSearch.join(','));
     $('#ingredient').val('');
   })
 
   $('#search-recipes').submit(function (event) {
     event.preventDefault();
     Recipe.builtSearch = Recipe.ingredientSearch.join(',');
-    console.log(Recipe.builtSearch);
-    Recipe.search(Recipe.builtSearch);
     Recipe.ingredientSearch = [];
+    Recipe.search(Recipe.builtSearch);
   })
 }
 
 Recipe.search = ingredients => {
-  $.get(`${__API_URL__}/recipes/ingredient/search/${ingredients}`)
+  $.get(`${__API_URL__}/recipes/${ingredients}`)
     .then(results => {
-      Recipe.loadAll(results);
+      console.log(`${ingredients}`);
+      console.log(JSON.parse(results).recipes);
+      Recipe.loadAll(JSON.parse(results).recipes);
     })
     .catch(err => console.error(err))
 }
+
+$(document).ready(() => {
+  Recipe.buildSearch();
+})

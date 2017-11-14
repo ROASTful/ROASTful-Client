@@ -44,3 +44,8 @@
   color: white;
   border: #F7C331 outset 2px;
 }
+
+#full-ingredient-search {
+  width: 100%;
+  text-align: center;
+}
