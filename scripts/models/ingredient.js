@@ -2,7 +2,9 @@
 
 var app = app || {};
 var __API_URL__ = 'https://roastful.herokuapp.com';
-var userName = JSON.parse(localStorage.user) || false;
+if(localStorage.user){
+  var userName = JSON.parse(localStorage.user);
+}
 // var __API_URL__ = 'http://localhost:3000';
 
 function Recipe(rawDataObj) {
