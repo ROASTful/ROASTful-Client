@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/modules.css">
+    <link rel="stylesheet" href="styles/modules/error-main.css">
 
   <!-- TEMPLATES -->
   <script id="error-template" type="text/x-handlebars-template">
@@ -28,6 +29,7 @@
           {{/ingredients}}
         </ul>
         <a href="#" class="show-more" data-recipeid="{{recipe_id}}">Show ingredients &rarr;</a>
+        <a href="#" class="save-recipe" data-recipeid="{{recipe_id}}">Save to My Recipes &#9745;</a>
       </section>
   </script>
 
@@ -95,7 +97,9 @@
 
     <!-- append recipes to this div -->
 
-    <div id="recipe-results"></div>
+    <div id="recipe-results">
+
+    </div>
 
    <!-- <div id="recipe-results">
         <h3>Peanut Butter Sandwich</h3>
@@ -155,6 +159,7 @@
     <script type="text/javascript" src="scripts/views/error-view.js"></script>
     <script type="text/javascript" src="scripts/views/ingredient-view.js"></script>
     <script type="text/javascript" src="scripts/models/login.js"></script>
+    <script type="text/javascript" src="scripts/models/user.js"></script>
     <script type="text/javascript" src="scripts/views/routes.js"></script>
 </body>
 </html>
