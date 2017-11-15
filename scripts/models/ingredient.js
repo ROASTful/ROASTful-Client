@@ -27,6 +27,8 @@ Recipe.loadAll = rawData => {
   Recipe.all = rawData.map(rawData => new Recipe(rawData));
   $('#recipe-results').empty();
   Recipe.showRecipes();
+  $('.recipe-ingredients').hide();
+  $('.recipes h2').hide();
 }
 
 //shows first five results and adds show more buttons
@@ -67,20 +69,21 @@ Recipe.buildSearch = () => {
 
 Recipe.showIngredients = () => {
   console.log('shown');
-  // $('.recipe-image').hide();
   $('.recipe-ingredients').hide();
+  $('.recipes h2').hide();
+  // $('.recipe-image').hide();
   $('#recipe-results').on('click', 'a.show-more', function(event) {
     console.log('clicked');
     console.log(event);
     event.preventDefault();
     if ($(this).text() === 'Show ingredients →') {
-      if($(this).data('loaded')){
-        
+      if (!$(this).data('loaded')){
+        Recipe.retreiveIngredients($(this).data('recipeid'))
+        $(this).data('loaded', true);
       }
       console.log('do it');
       $(this).parent().find('*').fadeIn();
       $(this).html('Hide ingredients &larr;');
-      Recipe.retreiveIngredients($(this).data('recipeid'));
     } else {
       $(this).html('Show ingredients &rarr;');
       // $(this).parent().find('.recipe-image').hide();
@@ -89,6 +92,27 @@ Recipe.showIngredients = () => {
   })
   console.log('shown2')
 }
+// Recipe.showIngredients = () => {
+//   $('.recipe-image').hide();
+//   $('.recipe-ingredients').hide();
+//   $('.recipes').on('click', 'a.show-more', function(event) {
+//     event.preventDefault();
+//     if ($(this).text() === 'Show ingredients →') {
+//       if (!$(this).data('loaded')){
+//         Recipe.retreiveIngredients($(this).data('recipeid'))
+//         $(this).data('loaded', true);
+//       }
+//       $(this).parent().find('*').fadeIn();
+//       $(this).html('Hide ingredients &larr;');
+//     } else {
+//       $(this).html('Show ingredients &rarr;');
+//       $(this).parent().find('.recipe-image').hide();
+//       $(this).parent().find('.recipe-ingredients').hide();
+//     }
+//   })
+// }
+
+
 
 Recipe.search = ingredients => {
   $.get(`${__API_URL__}/recipes/search/${ingredients}`)
