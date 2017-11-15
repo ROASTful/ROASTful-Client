@@ -2,7 +2,7 @@
 
 var app = app || {};
 var __API_URL__ = 'https://roastful.herokuapp.com';
-var userName = JSON.parse(localStorage.user) || false;
+// var userName = JSON.parse(localStorage.user) || false;
 // var __API_URL__ = 'http://localhost:3000';
 
 function Recipe(rawDataObj) {
@@ -24,9 +24,7 @@ Recipe.prototype.toHtml = function () {
 }
 
 Recipe.loadAll = rawData => {
-  Recipe.all = rawData.map(rawData => new Recipe(rawData));
-  $('#recipe-results').empty();
-  Recipe.all.forEach(recipe => $('#recipe-results').append(recipe.toHtml()));
+  Recipe.all = rawData.map(rawData => new Recipe(rawData))
 }
 
 Recipe.loadAllIngredients = rawData => {
@@ -70,6 +68,13 @@ Recipe.showIngredients = () => {
   })
 }
 
+Recipe.addToMyRecipes = () => {
+  $('.recipes').on('click', 'a.save-recipe', function(event) {
+    event.preventDefault();
+    Recipe.sendToMyRecipes($(this).data('recipeid'))
+})
+}
+
 
 Recipe.search = ingredients => {
   $.get(`${__API_URL__}/recipes/search/${ingredients}`)
@@ -88,13 +93,14 @@ Recipe.retreiveIngredients = (recipeid) => {
     .catch(err => console.error(err))
 }
 
-Recipe.addToMyRecipes = (recipeid) => {
-  $('.recipes').on('click', 'a.save-recipe', function(event) {
-    event.preventDefault();
-
+Recipe.sendToMyRecipes = (recipeid) => {
+  $.ajax({
+    url: `${__API_URL__}/v1/users/sno`,
+    method: 'PUT',
+    data: {recipes: recipeid},
+    success: function() {
+      console.log(recipeid),
+      page('/')
+    }
   })
 }
-$(document).ready(() => {
-  Recipe.buildSearch();
-  Recipe.showIngredients();
-})
