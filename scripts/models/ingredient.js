@@ -2,6 +2,7 @@
 
 var app = app || {};
 var __API_URL__ = 'https://roastful.herokuapp.com';
+var userName = JSON.parse(localStorage.user) || false;
 // var __API_URL__ = 'http://localhost:3000';
 
 function Recipe(rawDataObj) {
@@ -67,6 +68,7 @@ Recipe.showIngredients = () => {
   })
 }
 
+
 Recipe.search = ingredients => {
   $.get(`${__API_URL__}/recipes/search/${ingredients}`)
     .then(results => {
@@ -84,6 +86,12 @@ Recipe.retreiveIngredients = (recipeid) => {
     .catch(err => console.error(err))
 }
 
+Recipe.addToMyRecipes = (recipeid) => {
+  $('.recipes').on('click', 'a.save-recipe', function(event) {
+    event.preventDefault();
+
+  })
+}
 $(document).ready(() => {
   Recipe.buildSearch();
   Recipe.showIngredients();
