@@ -53,9 +53,12 @@ Recipe.showIngredients = () => {
   $('.recipes').on('click', 'a.show-more', function(event) {
     event.preventDefault();
     if ($(this).text() === 'Show ingredients →') {
+      if (!$(this).data('loaded')){
+        Recipe.retreiveIngredients($(this).data('recipeid'))
+        $(this).data('loaded', true);
+      }
       $(this).parent().find('*').fadeIn();
       $(this).html('Hide ingredients &larr;');
-      Recipe.retreiveIngredients($(this).data('recipeid'));
     } else {
       $(this).html('Show ingredients &rarr;');
       $(this).parent().find('.recipe-image').hide();
