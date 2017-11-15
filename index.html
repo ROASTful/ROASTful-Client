@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/modules.css">
+    <link rel="stylesheet" href="styles/modules/error-main.css">
 
   <!-- TEMPLATES -->
   <script id="error-template" type="text/x-handlebars-template">
@@ -28,6 +29,7 @@
           {{/ingredients}}
         </ul>
         <a href="#" class="show-more" data-recipeid="{{recipe_id}}">Show ingredients &rarr;</a>
+        <a href="#" class="save-recipe" data-recipeid="{{recipe_id}}">Save to My Recipes &#9745;</a>
       </section>
   </script>
 
@@ -83,7 +85,7 @@
     </section>
   </header>
 
-  <div id="search-main" class="main-div clearfix container">
+  <div id="search-main" class="main-div clearfix container"/>
     <div class="search-box">
       <h2>Search Recipes by Ingredient</h2>
       <form id="search-recipes">
@@ -97,7 +99,9 @@
 
     <!-- append recipes to this div -->
 
-    <div id="recipe-results"></div>
+    <div id="recipe-results">
+
+    </div>
 
    <!-- <div id="recipe-results">
         <h3>Peanut Butter Sandwich</h3>
@@ -110,8 +114,8 @@
         <li>Spread on Peanut Butter</li>
         <li>Put slices of bread together, peanut buttered sides touching</li>
         </ul>
-    </div>
-  </div>-->
+    </div> -->
+  </div>
 
   <div id="pantry-main" class="main-div clearfix container">
 
@@ -149,7 +153,6 @@
   </div>
 <footer>
 </footer>
-
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>

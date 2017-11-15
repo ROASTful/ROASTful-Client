@@ -1,6 +1,7 @@
 'use strict';
 
 var __API_URL__ = 'https://roastful.herokuapp.com';
+var Login = {};
 
 
 // ============= EVENT HANDLERS ============== //
@@ -16,7 +17,6 @@ $('#login button[name="login"]').click(function(e) {
   if (!login.validation()) return;
 
   // AFTER SUCCESSFUL VALIDATION
-  // login.register(username, password);
   login.signIn(username, password);
 })
 
