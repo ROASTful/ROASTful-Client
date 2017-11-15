@@ -8,7 +8,7 @@ function Recipe(rawDataObj) {
   Object.keys(rawDataObj).forEach(key => this[key] = rawDataObj[key]);
 }
 
-function FullRecipe(rawDataObj) {
+function Details(rawDataObj) {
   Object.keys(rawDataObj).forEach(key => this[key] = rawDataObj[key]);
 }
 
@@ -23,11 +23,11 @@ Recipe.prototype.toHtml = function () {
 }
 
 Recipe.loadAll = rawData => {
-  Recipe.all = rawData.map(rawDataObj => new Recipe(rawDataObj))
+  Recipe.all = rawData.map(rawData => new Recipe(rawData))
 }
 
 Recipe.loadAllIngredients = rawData => {
-  Recipe.ingredientsByRecipe = rawData.map(rawDataObj = new FullRecipe(rawDataObj))
+  rawData.ingredients.forEach((eachList) => $(`.recipe-ingredients[data-recipeid="${rawData.recipe_id}"]`).append(`<li>${eachList}</li>`))
 }
 
 Recipe.buildSearch = () => {
@@ -48,18 +48,18 @@ Recipe.buildSearch = () => {
 }
 
 Recipe.showIngredients = () => {
-  $('#recipe-image').hide();
-  $('#recipe-ingredients').hide();
-  $('.show-more').click(function(event) {
+  $('.recipe-image').hide();
+  $('.recipe-ingredients').hide();
+  $('.recipes').on('click', 'a.show-more', function(event) {
     event.preventDefault();
     if ($(this).text() === 'Show ingredients →') {
       $(this).parent().find('*').fadeIn();
       $(this).html('Hide ingredients &larr;');
+      Recipe.retreiveIngredients($(this).data('recipeid'));
     } else {
       $(this).html('Show ingredients &rarr;');
-      $(this).parent().find('#recipe-image').hide();
-      $(this).parent().find('#recipe-ingredients').hide();
-      //afdadf;ldfjl;
+      $(this).parent().find('.recipe-image').hide();
+      $(this).parent().find('.recipe-ingredients').hide();
     }
   })
 }
@@ -72,10 +72,11 @@ Recipe.search = ingredients => {
     .catch(err => console.error(err))
 }
 
-Recipe.retreiveIngredients = recipe_id => {
-  $.get(`${__API_URL__}/recipes/ingredient/${recipe_id}`)
+Recipe.retreiveIngredients = (recipeid) => {
+  $.get(`${__API_URL__}/recipes/ingredient/${recipeid}`)
     .then(results => {
-      Recipe.loadAllIngredients(JSON.parse(results).ingredients);
+      console.log(JSON.parse(results).recipe);
+      Recipe.loadAllIngredients(JSON.parse(results).recipe);
     })
     .catch(err => console.error(err))
 }

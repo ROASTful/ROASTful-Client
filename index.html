@@ -18,18 +18,17 @@
   </script>
   <!-- recipe template -->
   <script id="recipe-template" type="text/x-handlebars-template">
-      {{#with recipe}}
+      <section class="recipes">
         <h3><a href="{{source_url}}">{{title}}</a></h3>
-        <img id="recipe-image" src="{{image_url}}">
-      {{/with}}
-        <ul id="recipe-ingredients">Ingredients
-        {{#each this}}
+        <img class="recipe-image" src="{{image_url}}">
+
+        <ul class="recipe-ingredients" data-recipeid="{{recipe_id}}">Ingredients
           {{#ingredients}}
           <li>{{this}}</li>
           {{/ingredients}}
-        {{/each}}
         </ul>
-        <a href="#" class="show-more">Show ingredients &rarr;</a>
+        <a href="#" class="show-more" data-recipeid="{{recipe_id}}">Show ingredients &rarr;</a>
+      </section>
   </script>
 
   <script id="my-recipe-template" type="text/x-handlebars-template">
