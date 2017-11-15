@@ -16,19 +16,20 @@
     <p>{{error}}.</p>
     <div class="space"></div>
   </script>
-
+  <!-- recipe template -->
   <script id="recipe-template" type="text/x-handlebars-template">
       {{#with recipe}}
         <h3><a href="{{source_url}}">{{title}}</a></h3>
-        <img src="{{image_url}}">
+        <img id="recipe-image" src="{{image_url}}">
       {{/with}}
-        <ul>Ingredients
+        <ul id="recipe-ingredients">Ingredients
         {{#each this}}
           {{#ingredients}}
           <li>{{this}}</li>
           {{/ingredients}}
         {{/each}}
         </ul>
+        <a href="#" class="show-more">Show ingredients &rarr;</a>
   </script>
 
   <script id="my-recipe-template" type="text/x-handlebars-template">
@@ -71,7 +72,7 @@
     </nav>
 
     <!-- login box -->
-    <section id="login">
+    <!-- <section id="login">
       <input id="username" type="text" name="user" placeholder="Username" maxlength="20">
       <p id="userPop"></p>
       <input id="password" type="password" name="pass" placeholder="Password" maxlength="16">
