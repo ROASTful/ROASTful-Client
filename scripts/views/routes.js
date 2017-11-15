@@ -1,6 +1,7 @@
 'use strict'
 var app = app || {};
 
+
 page('/', ctx => app.Ingredient.fetchAll(app.ingredientView.initIndexPage));
 page('/ingredient/error', ctx => app.ingredientView.errorCallback(ctx));
 page('/pantry', '/');

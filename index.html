@@ -16,19 +16,19 @@
     <p>{{error}}.</p>
     <div class="space"></div>
   </script>
-
+  <!-- recipe template -->
   <script id="recipe-template" type="text/x-handlebars-template">
-      {{#with recipe}}
+      <section class="recipes">
         <h3><a href="{{source_url}}">{{title}}</a></h3>
-        <img src="{{image_url}}">
-      {{/with}}
-        <ul>Ingredients
-        {{#each this}}
+        <img class="recipe-image" src="{{image_url}}">
+
+        <ul class="recipe-ingredients" data-recipeid="{{recipe_id}}">Ingredients
           {{#ingredients}}
           <li>{{this}}</li>
           {{/ingredients}}
-        {{/each}}
         </ul>
+        <a href="#" class="show-more" data-recipeid="{{recipe_id}}">Show ingredients &rarr;</a>
+      </section>
   </script>
 
   <script id="my-recipe-template" type="text/x-handlebars-template">
@@ -71,11 +71,13 @@
     </nav>
 
     <!-- login box -->
-    <section id="login">
-      <input id="username" type="text" name="user" placeholder="Username">
-      <input id="password" type="password" name="pass" placeholder="Password">
+    <!-- <section id="login">
+      <input id="username" type="text" name="user" placeholder="Username" maxlength="20">
+      <p id="userPop"></p>
+      <input id="password" type="password" name="pass" placeholder="Password" maxlength="16">
+      <p id="passwordPop"></p>
       <button type="button" name="login">LOGIN</button>
-    </section>
+    </section> -->
 
   </header>
 
@@ -83,10 +85,13 @@
     <div class="search-box">
       <h2>Search Recipes by Ingredient</h2>
       <form id="search-recipes">
-        <input type="text" id="ingredient" name="ingredient" placeholder="search by ingredient" />
-        <button type="submit" id="submitAddBook">search</button>
+        <input type="text" id="ingredient" name="ingredient" placeholder="search by ingredient" value=""/>
+        <button type="button" id="addIngredient">Add</button>
+        <button type="submit" id="submitIngredients">Search!</button>
       </form>
     </div>
+  <label id="export-field" for="ingredient-search">
+        <input type="text" readonly id="full-ingredient-search" val="">
 
     <!-- append recipes to this div -->
 
@@ -149,6 +154,7 @@
     <script type="text/javascript" src="scripts/models/ingredient.js"></script>
     <script type="text/javascript" src="scripts/views/error-view.js"></script>
     <script type="text/javascript" src="scripts/views/ingredient-view.js"></script>
+    <script type="text/javascript" src="scripts/models/login.js"></script>
     <script type="text/javascript" src="scripts/views/routes.js"></script>
 </body>
 </html>
