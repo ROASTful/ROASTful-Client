@@ -59,6 +59,7 @@ Recipe.showIngredients = () => {
       $(this).html('Show ingredients &rarr;');
       $(this).parent().find('#recipe-image').hide();
       $(this).parent().find('#recipe-ingredients').hide();
+      //afdadf;ldfjl;
     }
   })
 }
