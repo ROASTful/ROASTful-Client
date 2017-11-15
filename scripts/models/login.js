@@ -2,7 +2,7 @@
 
 var __API_URL__ = 'https://roastful.herokuapp.com';
 
-
+var Login = {};
 // login validation
 $('#login button').click(function(e) {
   let $userValidation = $('#userPop');
@@ -11,7 +11,7 @@ $('#login button').click(function(e) {
   let password = $('#password').val();
   console.log('login test');
 
-  login.clear();
+  Login.clear();
 
   // =========== USERNAME VALIDATION ===========
   if (username.length <= 0) {
@@ -39,16 +39,16 @@ $('#login button').click(function(e) {
 
   // =========== SUCCESS VALIDATION ===========
 
-  login.process(username, password);
+  Login.process(username, password);
 })
 
-login.process = (user, pass) => {
-  console.log('processing login request');
+Login.process = (user, pass) => {
+  console.log('processing Login request');
   $.post(`${__API_URL__}/v1/users`, {username: user, password: pass})
   .then(result => console.log('request processed', result));
 }
 
-login.clear = () => {
+Login.clear = () => {
   $('#userPop').empty();
   $('#passwordPop').empty();
   $('#userPop').css('padding-bottom', '0');

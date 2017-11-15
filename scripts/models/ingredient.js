@@ -24,7 +24,9 @@ Recipe.prototype.toHtml = function () {
 }
 
 Recipe.loadAll = rawData => {
-  Recipe.all = rawData.map(rawData => new Recipe(rawData))
+  Recipe.all = rawData.map(rawData => new Recipe(rawData));
+  $('#recipe-results').empty();
+  Recipe.all.forEach(recipe => $('#recipe-results').append(recipe.toHtml()));
 }
 
 Recipe.loadAllIngredients = rawData => {
