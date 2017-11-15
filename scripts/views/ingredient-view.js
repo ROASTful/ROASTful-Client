@@ -55,19 +55,7 @@ let myPantry = Handlebars.compile($('#pantry-template').html());
 //       }
 //     });
 //   };
-  
-   recipe.forEach(
-    function(foobar) {
-      let template = Handlebars.compile($('#recipe-template').html());
 
-      $('#recipe-results').append(template(foobar));
-    })
-  $('#recipe-results .recipes:nth-of-type(n+6)').hide();
-  $('#recipe-results').append('<a class="more-recipes">Show more recipes &rarr;</a>')
-  $('#recipe-results').on('click', 'a.more-recipes', function() {
-    $('#recipe-results .recipes').fadeIn();
-    $('#recipe-results a.more-recipes').hide();
-  })
   $('#recipe-list').append(myRecipies(recipe));
   $('#ingredient-list').append(myPantry(recipe));
 

@@ -23,10 +23,28 @@ Recipe.prototype.toHtml = function () {
   return template(this);
 }
 
+//passes results through Recipe constructor, emptys the previous results and then calls showRecipes
 Recipe.loadAll = rawData => {
   Recipe.all = rawData.map(rawData => new Recipe(rawData));
   $('#recipe-results').empty();
-  Recipe.all.forEach(recipe => $('#recipe-results').append(recipe.toHtml()));
+  Recipe.showRecipes();
+  $('.recipe-ingredients').hide();
+  $('.recipes h2').hide();
+}
+
+//shows first five results and adds show more buttons
+Recipe.showRecipes = () => {
+  Recipe.all.forEach(
+      function(foobar) {
+        let template = Handlebars.compile($('#recipe-template').html());
+        $('#recipe-results').append(template(foobar));
+      })
+    $('#recipe-results .recipes:nth-of-type(n+6)').hide();
+    $('#recipe-results').append('<a class="more-recipes">Show more recipes &rarr;</a>')
+    $('#recipe-results').on('click', 'a.more-recipes', function() {
+      $('#recipe-results .recipes').fadeIn();
+      $('#recipe-results a.more-recipes').hide();
+    })
 }
 
 Recipe.loadAllIngredients = rawData => {
@@ -51,24 +69,51 @@ Recipe.buildSearch = () => {
 }
 
 Recipe.showIngredients = () => {
-  $('.recipe-image').hide();
+  console.log('shown');
   $('.recipe-ingredients').hide();
-  $('.recipes').on('click', 'a.show-more', function(event) {
+  $('.recipes h2').hide();
+  // $('.recipe-image').hide();
+  $('#recipe-results').on('click', 'a.show-more', function(event) {
+    console.log('clicked');
+    console.log(event);
     event.preventDefault();
     if ($(this).text() === 'Show ingredients →') {
       if (!$(this).data('loaded')){
         Recipe.retreiveIngredients($(this).data('recipeid'))
         $(this).data('loaded', true);
       }
+
       $(this).parent().find('*').fadeIn();
       $(this).html('Hide ingredients &larr;');
     } else {
       $(this).html('Show ingredients &rarr;');
-      $(this).parent().find('.recipe-image').hide();
+      // $(this).parent().find('.recipe-image').hide();
       $(this).parent().find('.recipe-ingredients').hide();
     }
   })
+  console.log('shown2')
 }
+// Recipe.showIngredients = () => {
+//   $('.recipe-image').hide();
+//   $('.recipe-ingredients').hide();
+//   $('.recipes').on('click', 'a.show-more', function(event) {
+//     event.preventDefault();
+//     if ($(this).text() === 'Show ingredients →') {
+//       if (!$(this).data('loaded')){
+//         Recipe.retreiveIngredients($(this).data('recipeid'))
+//         $(this).data('loaded', true);
+//       }
+//       $(this).parent().find('*').fadeIn();
+//       $(this).html('Hide ingredients &larr;');
+//     } else {
+//       $(this).html('Show ingredients &rarr;');
+//       $(this).parent().find('.recipe-image').hide();
+//       $(this).parent().find('.recipe-ingredients').hide();
+//     }
+//   })
+// }
+
+
 
 
 Recipe.search = ingredients => {
@@ -87,14 +132,3 @@ Recipe.retreiveIngredients = (recipeid) => {
     })
     .catch(err => console.error(err))
 }
-
-Recipe.addToMyRecipes = (recipeid) => {
-  $('.recipes').on('click', 'a.save-recipe', function(event) {
-    event.preventDefault();
-
-  })
-}
-$(document).ready(() => {
-  Recipe.buildSearch();
-  Recipe.showIngredients();
-})
