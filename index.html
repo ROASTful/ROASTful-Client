@@ -20,15 +20,16 @@
   <script id="recipe-template" type="text/x-handlebars-template">
       {{#with recipe}}
         <h3><a href="{{source_url}}">{{title}}</a></h3>
-        <img src="{{image_url}}">
+        <img id="recipe-image" src="{{image_url}}">
       {{/with}}
-        <ul>Ingredients
+        <ul id="recipe-ingredients">Ingredients
         {{#each this}}
           {{#ingredients}}
           <li>{{this}}</li>
           {{/ingredients}}
         {{/each}}
         </ul>
+        <a href="#" class="show-more">Show ingredients &rarr;</a>
   </script>
 
   <script id="my-recipe-template" type="text/x-handlebars-template">

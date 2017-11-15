@@ -8,9 +8,14 @@ function Recipe(rawDataObj) {
   Object.keys(rawDataObj).forEach(key => this[key] = rawDataObj[key]);
 }
 
+function FullRecipe(rawDataObj) {
+  Object.keys(rawDataObj).forEach(key => this[key] = rawDataObj[key]);
+}
+
 Recipe.all = [];
 Recipe.ingredientSearch = [];
 Recipe.builtSearch;
+Recipe.ingredientsByRecipe = [];
 
 Recipe.prototype.toHtml = function () {
   let template = Handlebars.compile($('#recipe-template').text())
@@ -19,6 +24,10 @@ Recipe.prototype.toHtml = function () {
 
 Recipe.loadAll = rawData => {
   Recipe.all = rawData.map(rawDataObj => new Recipe(rawDataObj))
+}
+
+Recipe.loadAllIngredients = rawData => {
+  Recipe.ingredientsByRecipe = rawData.map(rawDataObj = new FullRecipe(rawDataObj))
 }
 
 Recipe.buildSearch = () => {
@@ -38,16 +47,39 @@ Recipe.buildSearch = () => {
   })
 }
 
+Recipe.showIngredients = () => {
+  $('#recipe-image').hide();
+  $('#recipe-ingredients').hide();
+  $('.show-more').click(function(event) {
+    event.preventDefault();
+    if ($(this).text() === 'Show ingredients →') {
+      $(this).parent().find('*').fadeIn();
+      $(this).html('Hide ingredients &larr;');
+    } else {
+      $(this).html('Show ingredients &rarr;');
+      $(this).parent().find('#recipe-image').hide();
+      $(this).parent().find('#recipe-ingredients').hide();
+    }
+  })
+}
+
 Recipe.search = ingredients => {
-  $.get(`${__API_URL__}/recipes/${ingredients}`)
+  $.get(`${__API_URL__}/recipes/search/${ingredients}`)
     .then(results => {
-      console.log(`${ingredients}`);
-      console.log(JSON.parse(results).recipes);
       Recipe.loadAll(JSON.parse(results).recipes);
+    })
+    .catch(err => console.error(err))
+}
+
+Recipe.retreiveIngredients = recipe_id => {
+  $.get(`${__API_URL__}/recipes/ingredient/${recipe_id}`)
+    .then(results => {
+      Recipe.loadAllIngredients(JSON.parse(results).ingredients);
     })
     .catch(err => console.error(err))
 }
 
 $(document).ready(() => {
   Recipe.buildSearch();
+  Recipe.showIngredients();
 })
