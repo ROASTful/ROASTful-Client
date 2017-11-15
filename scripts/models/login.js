@@ -54,33 +54,30 @@ $('#login a').click(function(e) {
 
 // ============= LOGIN FUNCTIONS ============== //
 
-// process the login attempt
+// process login attempt
 login.register = (user, pass) => {
   console.log('processing registration request');
   $.post(`${__API_URL__}/v1/users`, {username: user, password: pass})
   .then(result => {
-  //   console.log('request processed', result);
     if (result === 'Created') {
       console.log('account created');
       $('#login').hide()
       $('a[href="/login"]').text(`${user}: Logout?`)
     } else {
-      console.log('exists');
+      console.log('account exists');
       $('#userPop').text('That Username Already Exists');
       $('#userPop').css('padding', '1vw 0');
     }
   });
 }
 
-// process sign in attempt
+// process sign-in attempt
 login.signIn = (user, pass) => {
-  console.log(user.toLowerCase());
   console.log('processing login request');
   $.get(`${__API_URL__}/v1/users/${user.toLowerCase()}/${pass}`,)
   .then(userInfo => {
     console.table(userInfo);
     if (userInfo) {
-      console.log('true');
       $('#login').hide();
       $('a[href="/login"]').text(`logout: ${userInfo.username}`);
     } else {
@@ -122,7 +119,7 @@ login.validation = () => {
   return true;
 }
 
-// clear validation errors
+// clear validation error displays
 login.clear = () => {
   $('#userPop').empty();
   $('#passwordPop').empty();
