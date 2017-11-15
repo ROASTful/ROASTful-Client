@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book List Client</title>
+    <title>ROASTful</title>
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/icons.css">
     <link rel="stylesheet" href="styles/base.css">
@@ -22,14 +22,16 @@
       <section class="recipes">
         <h3><a href="{{source_url}}">{{title}}</a></h3>
         <img class="recipe-image" src="{{image_url}}">
-
-        <ul class="recipe-ingredients" data-recipeid="{{recipe_id}}">Ingredients
+        <ul class="recipe-ingredients" data-recipeid="{{recipe_id}}">
+          <h2>Ingredients</h2>
           {{#ingredients}}
           <li>{{this}}</li>
           {{/ingredients}}
         </ul>
+        
         <a href="#" class="show-more" data-recipeid="{{recipe_id}}">Show ingredients &rarr;</a>
         <a href="#" class="save-recipe" data-recipeid="{{recipe_id}}">Save to My Recipes &#9745;</a>
+
       </section>
   </script>
 
@@ -73,14 +75,16 @@
     </nav>
 
     <!-- login box -->
-    <!-- <section id="login">
+    <section id="login">
+      <h1>Login</h1>
       <input id="username" type="text" name="user" placeholder="Username" maxlength="20">
       <p id="userPop"></p>
       <input id="password" type="password" name="pass" placeholder="Password" maxlength="16">
       <p id="passwordPop"></p>
       <button type="button" name="login">LOGIN</button>
-    </section> -->
-
+      <button type="button" name="register" style="display: none">REGISTER</button>
+      <a>register</a>
+    </section>
   </header>
 
   <div id="search-main" class="main-div clearfix container"/>
