@@ -82,8 +82,3 @@ Recipe.retreiveIngredients = (recipeid) => {
     })
     .catch(err => console.error(err))
 }
-
-$(document).ready(() => {
-  Recipe.buildSearch();
-  Recipe.showIngredients();
-})

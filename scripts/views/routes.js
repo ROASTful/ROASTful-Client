@@ -2,7 +2,7 @@
 var app = app || {};
 
 
-page('/', ctx => app.ingredientView.initIndexPage);
+page('/', app.ingredientView.initIndexPage);
 page('/ingredient/error', ctx => app.ingredientView.errorCallback(ctx));
 page('/user/pantry', app.ingredientView.initPantryPage);
 page('/user/recipes', app.ingredientView.initRecipePage);
