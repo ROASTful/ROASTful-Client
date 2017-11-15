@@ -68,10 +68,15 @@ Recipe.buildSearch = () => {
 Recipe.showIngredients = () => {
   console.log('shown');
   // $('.recipe-image').hide();
-  // $('.recipe-ingredients').hide();
-  $('.recipes').on('click', 'a.show-more', function(event) {
+  $('.recipe-ingredients').hide();
+  $('#recipe-results').on('click', 'a.show-more', function(event) {
+    console.log('clicked');
+    console.log(event);
     event.preventDefault();
     if ($(this).text() === 'Show ingredients →') {
+      if($(this).data('loaded')){
+        
+      }
       console.log('do it');
       $(this).parent().find('*').fadeIn();
       $(this).html('Hide ingredients &larr;');
@@ -79,9 +84,10 @@ Recipe.showIngredients = () => {
     } else {
       $(this).html('Show ingredients &rarr;');
       // $(this).parent().find('.recipe-image').hide();
-      // $(this).parent().find('.recipe-ingredients').hide();
+      $(this).parent().find('.recipe-ingredients').hide();
     }
   })
+  console.log('shown2')
 }
 
 Recipe.search = ingredients => {
