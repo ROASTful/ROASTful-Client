@@ -54,6 +54,11 @@ $('#login a').click(function(e) {
 
 // ============= LOGIN FUNCTIONS ============== //
 
+// find user on startup
+login.returningUser = () => {
+
+}
+
 // process login attempt
 login.register = (user, pass) => {
   console.log('processing registration request');
@@ -63,6 +68,7 @@ login.register = (user, pass) => {
       console.log('account created');
       $('#login').hide()
       $('a[href="/login"]').text(`${user}: Logout?`)
+      login.signIn(user, pass);
     } else {
       console.log('account exists');
       $('#userPop').text('That Username Already Exists');
@@ -80,6 +86,7 @@ login.signIn = (user, pass) => {
     if (userInfo) {
       $('#login').hide();
       $('a[href="/login"]').text(`logout: ${userInfo.username}`);
+      localStorage.user = userInfo.user_id;
     } else {
       $('#passwordPop').text('Incorrect Password or Username');
     }
