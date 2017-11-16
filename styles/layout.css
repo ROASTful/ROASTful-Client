@@ -1,18 +1,18 @@
-section#login {
-  position: absolute;
+#login {
   border: #6B7A8F groove 2px;
+  position: absolute;
   background-color: #F7882F;
   width: 100%;
-  padding: 10px 10%;
+  padding: 50px 10px;
   overflow: auto;
   text-align: center;
   box-shadow: 0px 5px 5px black;
 }
 
-input#username {
+#username {
   border: #F7C331 inset 2px;
   background: linear-gradient(#DCC7AA, #fff);
-  width: 100%;
+  width: 70%;
   color: #550000;
   font-size: 6vw;
   margin: 0;
@@ -22,10 +22,10 @@ input#username {
   padding-left: 2vw;
 }
 
-input#password {
+#password {
   border: #F7C331 inset 2px;
   background: linear-gradient(#DCC7AA, #fff);
-  width: 100%;
+  width: 70%;
   color: #550000;
   font-size: 6vw;
   margin: 0;
@@ -35,14 +35,13 @@ input#password {
 }
 
 #login button {
-  width: 80%;
+  width: 70%;
   border-radius: 2vw;
   font-size: 5vw;
   display: block;
   padding: 2vw 8vw;
   margin: 0 auto;
   margin-top: 4vw;
-  margin-bottom: 12vw;
   background: linear-gradient(#6B7A8F, #DCC7AA 120%);
   color: white;
   border: #F7C331 outset 2px;
@@ -50,25 +49,10 @@ input#password {
 
 
 #login #userPop, #login #passwordPop {
+  margin-right: 15%;
   text-align: right;
   font-size: 3vw;
   color: #aa0000;
-}
-
-#login #passwordPop {
-  padding-top: 1vw;
-}
-
-#login h1 {
-    font-size: 6vw;
-}
-
-#login a {
-  position: absolute;
-  font-size: 5vw;
-  right: 2vw;
-  bottom: 2vw;
-  color: #6B7Aef;
 }
 
 #full-ingredient-search {

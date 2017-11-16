@@ -1,129 +1,28 @@
 'use strict';
 
 var __API_URL__ = 'https://roastful.herokuapp.com';
-var Login = {};
-
-// ============= EVENT HANDLERS ============== //
-
-// ---- submit login ----
-$('#login button[name="login"]').click(function(e) {
-  let username = $('#username').val();
-  let password = $('#password').val();
-  console.log('login test');
-  login.clear();
-
-  // TESTING VALIDATION
-  if (!login.validation()) return;
-
-  // AFTER SUCCESSFUL VALIDATION
-  login.signIn(username, password);
-})
-
-// ---- submit registration ----
-$('#login button[name="register"]').click(function(e) {
-  let username = $('#username').val();
-  let password = $('#password').val();
-  console.log('registration test');
-  login.clear();
-
-  // TESTING VALIDATION
-  if (!login.validation()) return;
-
-  // AFTER SUCCESSFUL VALIDATION
-  login.register(username, password);
-})
-
-// ---- switch between login and register ----
-$('#login a').click(function(e) {
-  if ($('#login a').text() === 'register') {
-    login.clear();
-    $('#login h1').text('Register');
-    $('#login button[name="login"]').hide();
-    $('#login button[name="register"]').fadeIn();
-    $('#login a').text('login');
-  } else {
-    login.clear();
-    $('#login h1').text('Login');
-    $('#login button[name="register"]').hide();
-    $('#login button[name="login"]').fadeIn();
-    $('#login a').text('register');
-  }
-})
 
 
-// ============= LOGIN FUNCTIONS ============== //
-
-// returning users
-login.returningUser = () => {
-  console.log('welcome back');
-  $.get(`${__API_URL__}/returning/${localStorage.user_id}`,)
-  .then(userInfo => {
-    if (userInfo) {
-      $('#login').hide(); // <---- TODO - once nav bar is set up (remove)
-      $('a[href="/login"]').text(`logout: ${userInfo.username}`);
-      localStorage.user_id = userInfo.user_id;
-      localStorage.pantry = userInfo.pantry;
-      localStorage.recipes = userInfo.recipes;
-      console.log(`returning user ${userInfo.recipes} `);
-    } else {
-    }
-  })
-}
-
-// process login attempt
-login.register = (user, pass) => {
-  console.log('processing registration request');
-  $.post(`${__API_URL__}/v1/users`, {username: user, password: pass})
-  .then(result => {
-    if (result === 'Created') {
-      console.log('account created');
-      $('#login').hide()
-      $('a[href="/login"]').text(`${user}: Logout?`)
-      login.signIn(user, pass);
-    } else {
-      console.log('account exists');
-      $('#userPop').text('That Username Already Exists');
-      $('#userPop').css('padding', '1vw 0');
-    }
-  });
-}
-
-// process sign-in attempt
-login.signIn = (user, pass) => {
-  console.log('processing login request');
-  $.get(`${__API_URL__}/v1/users/${user.toLowerCase()}/${pass}`,)
-  .then(userInfo => {
-    console.table(userInfo);
-    if (userInfo) {
-      $('#login').hide();
-      $('a[href="/login"]').text(`logout: ${userInfo.username}`);
-      app.User.currentUser = new app.User(userInfo);
-      console.log(app.User.currentUser);
-      app.User.currentUser.password = null;
-      localStorage.user_id = JSON.stringify(app.User.user_id);
-      app.ingredientView.initIndexPage();
-    } else {
-      $('#passwordPop').text('Incorrect Password or Username');
-    }
-  })
-}
-
-// list of validation requirements
-login.validation = () => {
+// login validation
+$('#login button').click(function(e) {
   let $userValidation = $('#userPop');
   let $passValidation = $('#passwordPop');
   let username = $('#username').val();
   let password = $('#password').val();
+  console.log('login test');
 
+  login.clear();
+
+  // =========== USERNAME VALIDATION ===========
   if (username.length <= 0) {
     // console.log('requires username');
-    $userValidation.css('padding', '1vw 0');
+    $('#userPop').css('padding-bottom', '1vw');
     $userValidation.text('requires username');
     return;
   }
   if (/[\W]/.test(username)) {
     // must contain [a-zA-Z0-9_]
-    $userValidation.css('padding', '1vw 0');
+    $('#userPop').css('padding-bottom', '1vw');
     $userValidation.text(`username can only include 'a-z', '0-9', and '_'`);
     return;
   }
@@ -134,20 +33,23 @@ login.validation = () => {
   }
   if (/[\W]/.test(password)) {
     // must contain [a-zA-Z0-9_]
-    $passValidation.text(`password can only include 'a-z', '0-9', and '_'`);
+    $passValidation.text(`username can only include 'a-z', '0-9', and '_'`);
     return;
   }
 
-  return true;
+  // =========== SUCCESS VALIDATION ===========
+
+  login.process(username, password);
+})
+
+login.process = (user, pass) => {
+  console.log('processing login request');
+  $.post(`${__API_URL__}/v1/users`, {username: user, password: pass})
+  .then(result => console.log('request processed', result));
 }
 
-// clear validation error displays
 login.clear = () => {
   $('#userPop').empty();
   $('#passwordPop').empty();
-  $('#userPop').css('padding', '0');
-}
-
-if (localStorage.user_id) {
-  login.returningUser();
+  $('#userPop').css('padding-bottom', '0');
 }
