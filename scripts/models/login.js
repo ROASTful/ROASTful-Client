@@ -54,10 +54,6 @@ $('#login a').click(function(e) {
 
 // ============= LOGIN FUNCTIONS ============== //
 
-// find user on startup
-login.returningUser = () => {
-
-}
 
 // process login attempt
 login.register = (user, pass) => {
@@ -87,6 +83,8 @@ login.signIn = (user, pass) => {
       $('#login').hide();
       $('a[href="/login"]').text(`logout: ${userInfo.username}`);
       localStorage.user = userInfo.user_id;
+      localStorage.pantry = userInfo.pantry;
+      localStorage.recipes = userInfo.recipes;
     } else {
       $('#passwordPop').text('Incorrect Password or Username');
     }
@@ -119,7 +117,7 @@ login.validation = () => {
   }
   if (/[\W]/.test(password)) {
     // must contain [a-zA-Z0-9_]
-    $passValidation.text(`username can only include 'a-z', '0-9', and '_'`);
+    $passValidation.text(`password can only include 'a-z', '0-9', and '_'`);
     return;
   }
 
