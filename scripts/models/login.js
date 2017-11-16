@@ -3,7 +3,6 @@
 var __API_URL__ = 'https://roastful.herokuapp.com';
 var Login = {};
 
-
 // ============= EVENT HANDLERS ============== //
 
 // ---- submit login ----
@@ -54,6 +53,23 @@ $('#login a').click(function(e) {
 
 // ============= LOGIN FUNCTIONS ============== //
 
+// returning users
+login.returningUser = () => {
+  console.log('welcome back');
+  $.get(`${__API_URL__}/v1/users/returning/${localStorage.user_id}`,)
+  .then(userInfo => {
+    console.table(userInfo);
+    if (userInfo) {
+      $('#login').hide(); // <---- TODO - once nav bar is set up (remove)
+      $('a[href="/login"]').text(`logout: ${userInfo.username}`);
+      localStorage.user_id = userInfo.user_id;
+      localStorage.pantry = userInfo.pantry;
+      localStorage.recipes = userInfo.recipes;
+    } else {
+      console.log('returning user failed');
+    }
+  })
+}
 
 // process login attempt
 login.register = (user, pass) => {
@@ -82,7 +98,7 @@ login.signIn = (user, pass) => {
     if (userInfo) {
       $('#login').hide();
       $('a[href="/login"]').text(`logout: ${userInfo.username}`);
-      localStorage.user = userInfo.user_id;
+      localStorage.user_id = userInfo.user_id;
       localStorage.pantry = userInfo.pantry;
       localStorage.recipes = userInfo.recipes;
     } else {
@@ -129,4 +145,8 @@ login.clear = () => {
   $('#userPop').empty();
   $('#passwordPop').empty();
   $('#userPop').css('padding', '0');
+}
+
+if (localStorage.user_id) {
+  login.returningUser();
 }

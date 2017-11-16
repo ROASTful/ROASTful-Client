@@ -2,9 +2,6 @@
 
 var app = app || {};
 var __API_URL__ = 'https://roastful.herokuapp.com';
-if(localStorage.user){
-  var userName = JSON.parse(localStorage.user);
-}
 // var __API_URL__ = 'http://localhost:3000';
 
 function Recipe(rawDataObj) {
@@ -126,7 +123,7 @@ Recipe.retreiveIngredients = (recipeid) => {
 
 Recipe.sendToMyRecipes = (recipeid) => {
   $.ajax({
-    url: `${__API_URL__}/v1/users/${localStorage.user}`,
+    url: `${__API_URL__}/v1/users/${localStorage.user_id}`,
     method: 'PUT',
     data: {recipes: recipeid},
     success: function() {
