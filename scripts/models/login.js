@@ -59,11 +59,10 @@ login.returningUser = () => {
   $.get(`${__API_URL__}/returning/${localStorage.user_id}`,)
   .then(userInfo => {
     if (userInfo) {
-      $('#login').hide(); // <---- TODO - once nav bar is set up (remove)
       $('a[href="/user/login"]').text(`logout: ${userInfo.username}`);
-      localStorage.user_id = userInfo.user_id;
-      localStorage.pantry = userInfo.pantry;
-      localStorage.recipes = userInfo.recipes;
+      app.User.currentUser = new app.User(userInfo);
+      app.User.currentUser.password = null;
+      localStorage.user_id = JSON.stringify(app.User.currentUser.user_id);
       console.log(`returning user ${userInfo.user_id}`);
     } else {
     }
@@ -99,7 +98,7 @@ login.signIn = (user, pass) => {
       app.User.currentUser = new app.User(userInfo);
       console.log(app.User.currentUser);
       app.User.currentUser.password = null;
-      localStorage.user_id = JSON.stringify(app.User.user_id);
+      localStorage.user_id = JSON.stringify(app.User.currentUser.user_id);
       app.ingredientView.initIndexPage();
     } else {
       $('#passwordPop').text('Incorrect Password or Username');

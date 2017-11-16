@@ -4,9 +4,14 @@ var app = app || {};
 var __API_URL__ = 'https://roastful.herokuapp.com';
 // var __API_URL__ = 'http://localhost:3000';
 
+(function (module) {
+
+
 function Recipe(rawDataObj) {
   Object.keys(rawDataObj).forEach(key => this[key] = rawDataObj[key]);
 }
+
+Recipe.lastRecipeSaved;
 
 function Details(rawDataObj) {
   Object.keys(rawDataObj).forEach(key => this[key] = rawDataObj[key]);
@@ -40,8 +45,10 @@ Recipe.showRecipes = () => {
     })
   $('#recipe-results .recipes:nth-of-type(n+6)').hide();
   $('#recipe-results').append('<a class="more-recipes">Show more recipes &rarr;</a>')
+  $('a.save-recipe').hide();
   $('#recipe-results').on('click', 'a.more-recipes', function() {
     $('#recipe-results .recipes').fadeIn();
+    $('a.save-recipe').fadeIn();
     $('#recipe-results a.more-recipes').hide();
   })
 }
@@ -121,7 +128,9 @@ Recipe.addToMyRecipes = () => {
       console.log('recipeId already exists')
     } else {
       app.User.currentUser.recipes.push(recipeId)
+      let recipeObj = new Recipe(Recipe.lastRecipeSaved);
       Recipe.sendToMyRecipes(JSON.stringify(app.User.currentUser.recipes))
+      Recipe.saveToDatabase(recipeId, recipeObj);
     }
   })
 }
@@ -150,6 +159,7 @@ Recipe.search = ingredients => {
 Recipe.retreiveIngredients = (recipeid) => {
   $.get(`${__API_URL__}/recipes/ingredient/${recipeid}`)
     .then(results => {
+      Recipe.lastRecipeSaved = JSON.parse(results).recipe;
       console.log(JSON.parse(results).recipe);
       Recipe.loadAllIngredients(JSON.parse(results).recipe);
     })
@@ -166,3 +176,17 @@ Recipe.sendToMyRecipes = (allRecipes) => {
     }
   })
 }
+Recipe.saveToDatabase = (recipeId, recipeObj) => {
+  $.ajax({
+    url: `${__API_URL__}/db/recipes/${recipeId}`,
+    method: 'PUT',
+    data: recipeObj,
+    success: function() {
+      console.log('allrecipes, send to dbase ', allRecipes)
+    }
+  })
+}
+
+module.Recipe = Recipe;
+
+})(app);
