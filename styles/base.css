@@ -6,8 +6,24 @@
   margin-bottom:.8em;
 }
 
+a {
+  color: black;
+  display: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #f7882f;
+  text-decoration: none;
+}
+
+button:hover {
+  background: #f7882f;
+}
+
 body {
-  background: #f8f8f8;
+  background: #B0B28F;
+  /*background: #B2A163;*/
 }
 
 div, nav {
@@ -18,12 +34,34 @@ nav {
   background: #f7c331;
 }
 
+nav li {
+  display: inline-block;
+  margin: 0.5em;
+  font-size: 1.7em;
+}
+
+h1 {
+  font-size: 3.3em;
+  padding:.5em;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.8em;
+  padding: 0.6em;
+  text-align: center;
+}
+
+h3{
+  font-size: 1.5em;
+  margin: .4em;
+}
 
 .main-div {
-  width:85%;
+  background-color: #687a8f;
   margin: 2em auto;
   padding: 1.3em;
-  background-color: #687a8f;
+  width:85%;
 }
 
 .main-div div{
@@ -42,28 +80,6 @@ nav {
   float: right;
 }
 
-nav li {
-  display: inline-block;
-  margin: 0.5em;
-  font-size: 1.7em;
-}
-
-h1 {
-  font-size: 3.3em;
-  text-align: center;
-  padding:.5em;
-}
-
-h2 {
-  font-size: 1.8em;
-  text-align: center;
-  padding: 0.6em;
-}
-
-h3{
-  font-size: 1.5em;
-  margin: .4em;
-}
 
 .main-div h3{
   text-decoration: underline;
@@ -80,28 +96,27 @@ h3{
   margin-left: 1.2em;
 }
 
-a {
-color: black;
-text-decoration: none;
+
+.recipe-image {
+max-width: 100%;
+min-width: 40%;
 }
 
-a:hover {
-  text-decoration: none;
-  color: #f7882f;
+.recipes {
+  border-bottom: 5px solid #687a8f;
+  margin-bottom:6vw;
+  max-width: 100%;
+  padding-bottom: 1vw;
 }
-
-button:hover {
-  background: #f7882f;
-}
-
-#recipe-results {
-  text-align: left;
-  padding:.7em;
-}
-
 
 .clearfix::after {
   content: "";
   display: table;
   clear: both;
+}
+
+.recipe-results {
+  padding:.7em;
+  text-align: center;
+  width: 100%;
 }
