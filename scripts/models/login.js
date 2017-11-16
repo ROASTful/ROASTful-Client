@@ -60,11 +60,11 @@ login.returningUser = () => {
   .then(userInfo => {
     if (userInfo) {
       $('#login').hide(); // <---- TODO - once nav bar is set up (remove)
-      $('a[href="/login"]').text(`logout: ${userInfo.username}`);
+      $('a[href="/user/login"]').text(`logout: ${userInfo.username}`);
       localStorage.user_id = userInfo.user_id;
       localStorage.pantry = userInfo.pantry;
       localStorage.recipes = userInfo.recipes;
-      console.log(`returning user ${userInfo.recipes} `);
+      console.log(`returning user ${userInfo.user_id}`);
     } else {
     }
   })
@@ -78,7 +78,6 @@ login.register = (user, pass) => {
     if (result === 'Created') {
       console.log('account created');
       $('#login').hide()
-      $('a[href="/login"]').text(`${user}: Logout?`)
       login.signIn(user, pass);
     } else {
       console.log('account exists');
@@ -96,7 +95,7 @@ login.signIn = (user, pass) => {
     console.table(userInfo);
     if (userInfo) {
       $('#login').hide();
-      $('a[href="/login"]').text(`logout: ${userInfo.username}`);
+      $('a[href="/user/login"]').text(`logout: ${userInfo.username}`);
       app.User.currentUser = new app.User(userInfo);
       console.log(app.User.currentUser);
       app.User.currentUser.password = null;

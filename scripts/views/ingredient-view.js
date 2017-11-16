@@ -24,9 +24,15 @@ ingredientView.initIndexPage=() => {
 };
 
 ingredientView.initLoginPage=() => {
-  $('.container').hide();
-  $('#login').show();
-  // Recipe.showPantry();
+  let $login = $('a[href="/user/login"]');
+  let $loginText = $login.text();
+
+  if (/^logout/.test($loginText)) {
+    localStorage.clear();
+    $login.text(' Login/Register');
+  } else {
+  $('#login').slideDown();
+  }
 };
 
 ingredientView.initPantryPage=() => {
