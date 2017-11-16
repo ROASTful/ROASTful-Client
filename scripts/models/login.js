@@ -56,17 +56,16 @@ $('#login a').click(function(e) {
 // returning users
 login.returningUser = () => {
   console.log('welcome back');
-  $.get(`${__API_URL__}/v1/users/returning/${localStorage.user_id}`,)
+  $.get(`${__API_URL__}/returning/${localStorage.user_id}`,)
   .then(userInfo => {
-    console.table(userInfo);
     if (userInfo) {
       $('#login').hide(); // <---- TODO - once nav bar is set up (remove)
       $('a[href="/login"]').text(`logout: ${userInfo.username}`);
       localStorage.user_id = userInfo.user_id;
       localStorage.pantry = userInfo.pantry;
       localStorage.recipes = userInfo.recipes;
+      console.log(`returning user ${userInfo.recipes} `);
     } else {
-      console.log('returning user failed');
     }
   })
 }
