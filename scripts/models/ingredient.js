@@ -5,6 +5,9 @@ var __API_URL__ = 'https://roastful.herokuapp.com';
 if(localStorage.user){
   var userName = JSON.parse(localStorage.user);
 }
+if (localStorage.savedRecipes) {
+  var myRecipes = localStorage.savedRecipes
+}
 // var __API_URL__ = 'http://localhost:3000';
 
 function Recipe(rawDataObj) {
@@ -37,16 +40,16 @@ Recipe.loadAll = rawData => {
 //shows first five results and adds show more buttons
 Recipe.showRecipes = () => {
   Recipe.all.forEach(
-      function(foobar) {
-        let template = Handlebars.compile($('#recipe-template').html());
-        $('#recipe-results').append(template(foobar));
-      })
-    $('#recipe-results .recipes:nth-of-type(n+6)').hide();
-    $('#recipe-results').append('<a class="more-recipes">Show more recipes &rarr;</a>')
-    $('#recipe-results').on('click', 'a.more-recipes', function() {
-      $('#recipe-results .recipes').fadeIn();
-      $('#recipe-results a.more-recipes').hide();
+    function(foobar) {
+      let template = Handlebars.compile($('#recipe-template').html());
+      $('#recipe-results').append(template(foobar));
     })
+  $('#recipe-results .recipes:nth-of-type(n+6)').hide();
+  $('#recipe-results').append('<a class="more-recipes">Show more recipes &rarr;</a>')
+  $('#recipe-results').on('click', 'a.more-recipes', function() {
+    $('#recipe-results .recipes').fadeIn();
+    $('#recipe-results a.more-recipes').hide();
+  })
 }
 
 Recipe.loadAllIngredients = rawData => {
@@ -71,20 +74,19 @@ Recipe.buildSearch = () => {
 }
 
 Recipe.showIngredients = () => {
-  console.log('shown');
   $('.recipe-ingredients').hide();
   $('.recipes h2').hide();
   // $('.recipe-image').hide();
-  $('#recipe-results').on('click', 'a.show-more', function(event) {
+  $('#recipe-results').on('click', 'a.show-more', function(event)
+   {
     console.log('clicked');
-    console.log(event);
     event.preventDefault();
     if ($(this).text() === 'Show ingredients →') {
       if (!$(this).data('loaded')){
         Recipe.retreiveIngredients($(this).data('recipeid'))
         $(this).data('loaded', true);
       }
-      
+
       $(this).parent().find('*').fadeIn();
       $(this).html('Hide ingredients &larr;');
     } else {
@@ -93,16 +95,23 @@ Recipe.showIngredients = () => {
       $(this).parent().find('.recipe-ingredients').hide();
     }
   })
-  console.log('shown2')
 }
 
-
-
-
 Recipe.addToMyRecipes = () => {
-  $('.recipes').on('click', 'a.save-recipe', function(event) {
+  $('#recipe-results').on('click', 'a.save-recipe', function(event) {
     event.preventDefault();
-    Recipe.sendToMyRecipes($(this).data('recipeid'))
+    let recipeId = $(this).data('recipeid')
+    if (localStorage.savedRecipes) {
+      let myRecipes = JSON.parse(localStorage.savedRecipes);
+      myRecipes.push(recipeId)
+      let recipeCollection = JSON.stringify(myRecipes)
+      Recipe.sendToMyRecipes(recipeCollection)
+      localStorage.savedRecipes = recipeCollection;
+    } else {
+      let clickedRecipe = JSON.stringify(recipeId)
+      localStorage.savedRecipes = clickedRecipe
+      Recipe.sendToMyRecipes(clickedRecipe)
+    }
   })
 }
 
@@ -123,14 +132,13 @@ Recipe.retreiveIngredients = (recipeid) => {
     .catch(err => console.error(err))
 }
 
-Recipe.sendToMyRecipes = (recipeid) => {
+Recipe.sendToMyRecipes = (allRecipes) => {
   $.ajax({
-    url: `${__API_URL__}/v1/users/sno`,
+    url: `${__API_URL__}/v1/users/${localStorage.user_id}`,
     method: 'PUT',
-    data: {recipes: recipeid},
+    data: {recipes: allRecipes},
     success: function() {
-      console.log(recipeid),
-      page('/')
+      console.log('allrecipes, send to dbase ', allRecipes)
     }
   })
 }
