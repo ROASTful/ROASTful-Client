@@ -20,7 +20,7 @@
   <!-- recipe template -->
   <script id="recipe-template" type="text/x-handlebars-template">
       <section class="recipes">
-        <h3><a href="{{source_url}}">{{title}}</a></h3>
+        <h3><a href="{{source_url}}" target="_blank" >This will open &quot;{{title}}&quot; in a new tab</a></h3>
         <img class="recipe-image" src="{{image_url}}">
         <ul class="recipe-ingredients" data-recipeid="{{recipe_id}}">
           <h2>Ingredients</h2>
@@ -96,12 +96,12 @@
         <button type="submit" id="submitIngredients">Search!</button>
       </form>
     </div>
-  <label id="export-field" for="ingredient-search">
+  <label id="export-field" for="ingredient-search"/>
         <input type="text" readonly id="full-ingredient-search" val="">
 
     <!-- append recipes to this div -->
 
-    <div id="recipe-results">
+    <div class="recipe-results" id="recipe-results">
 
     </div>
 
@@ -117,7 +117,6 @@
         <li>Put slices of bread together, peanut buttered sides touching</li>
         </ul>
     </div> -->
-  </div>
 
   <div id="pantry-main" class="main-div clearfix container">
 
@@ -152,6 +151,7 @@
         <li>Put slices of bread together, peanut buttered sides touching</li>
         </ul>-->
     </div>
+  </div>
   </div>
 <footer>
 </footer>
