@@ -2,12 +2,16 @@
 var app = app || {};
 
 
-page('/', ctx => app.Ingredient.fetchAll(app.ingredientView.initIndexPage));
+page('/', app.ingredientView.initIndexPage);
 page('/ingredient/error', ctx => app.ingredientView.errorCallback(ctx));
-page('/pantry', '/');
-page('/recipe', '/');
+page('/user/pantry', app.ingredientView.initPantryPage);
+page('/user/recipes', app.ingredientView.initRecipePage);
+page('/user/login', app.ingredientView.initLoginPage);
 
-page('/pantry/:pantryName', app.ingredientController.loadByPantry, app.ingredientController.index);
-page('/recipe/:recipeName', app.recipeController.loadByRecipe, app.ingredientController.index);
+
+// page('/recipe', '/');
+//
+// page('/pantry/:pantryName', app.ingredientController.loadByPantry, app.ingredientController.index);
+// page('/recipe/:recipeName', app.recipeController.loadByRecipe, app.ingredientController.index);
 
 page();

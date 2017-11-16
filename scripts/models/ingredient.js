@@ -22,8 +22,28 @@ Recipe.prototype.toHtml = function () {
   return template(this);
 }
 
+//passes results through Recipe constructor, emptys the previous results and then calls showRecipes
 Recipe.loadAll = rawData => {
-  Recipe.all = rawData.map(rawData => new Recipe(rawData))
+  Recipe.all = rawData.map(rawData => new Recipe(rawData));
+  $('#recipe-results').empty();
+  Recipe.showRecipes();
+  $('.recipe-ingredients').hide();
+  $('.recipes h2').hide();
+}
+
+//shows first five results and adds show more buttons
+Recipe.showRecipes = () => {
+  Recipe.all.forEach(
+    function(foobar) {
+      let template = Handlebars.compile($('#recipe-template').html());
+      $('#recipe-results').append(template(foobar));
+    })
+  $('#recipe-results .recipes:nth-of-type(n+6)').hide();
+  $('#recipe-results').append('<a class="more-recipes">Show more recipes &rarr;</a>')
+  $('#recipe-results').on('click', 'a.more-recipes', function() {
+    $('#recipe-results .recipes').fadeIn();
+    $('#recipe-results a.more-recipes').hide();
+  })
 }
 
 Recipe.loadAllIngredients = rawData => {
@@ -48,21 +68,76 @@ Recipe.buildSearch = () => {
 }
 
 Recipe.showIngredients = () => {
-  $('.recipe-image').hide();
   $('.recipe-ingredients').hide();
-  $('.recipes').on('click', 'a.show-more', function(event) {
+  $('.recipes h2').hide();
+  // $('.recipe-image').hide();
+  $('#recipe-results').on('click', 'a.show-more', function(event)
+   {
+    console.log('clicked');
     event.preventDefault();
     if ($(this).text() === 'Show ingredients →') {
+      if (!$(this).data('loaded')){
+        Recipe.retreiveIngredients($(this).data('recipeid'))
+        $(this).data('loaded', true);
+      }
+
       $(this).parent().find('*').fadeIn();
       $(this).html('Hide ingredients &larr;');
-      Recipe.retreiveIngredients($(this).data('recipeid'));
     } else {
       $(this).html('Show ingredients &rarr;');
-      $(this).parent().find('.recipe-image').hide();
+      // $(this).parent().find('.recipe-image').hide();
       $(this).parent().find('.recipe-ingredients').hide();
     }
   })
 }
+// Recipe.showIngredients = () => {
+//   $('.recipe-image').hide();
+//   $('.recipe-ingredients').hide();
+//   $('.recipes').on('click', 'a.show-more', function(event) {
+//     event.preventDefault();
+//     if ($(this).text() === 'Show ingredients →') {
+//       if (!$(this).data('loaded')){
+//         Recipe.retreiveIngredients($(this).data('recipeid'))
+//         $(this).data('loaded', true);
+//       }
+//       $(this).parent().find('*').fadeIn();
+//       $(this).html('Hide ingredients &larr;');
+//     } else {
+//       $(this).html('Show ingredients &rarr;');
+//       $(this).parent().find('.recipe-image').hide();
+//       $(this).parent().find('.recipe-ingredients').hide();
+//     }
+//   })
+// }
+
+Recipe.addToMyRecipes = () => {
+  $('#recipe-results').on('click', 'a.save-recipe', function(event) {
+    event.preventDefault();
+    let recipeId = $(this).data('recipeid')
+    if (!app.User.currentUser.recipes) {
+      app.User.currentUser.recipes = [];
+    }
+    if (app.User.currentUser.recipes.includes(recipeId)) {
+      console.log('recipeId already exists')
+    } else {
+      app.User.currentUser.recipes.push(recipeId)
+      Recipe.sendToMyRecipes(JSON.stringify(app.User.currentUser.recipes))
+    }
+  })
+}
+//       let myRecipes = JSON.parse(localStorage.savedRecipes);
+//       myRecipes.push(recipeId)
+//       let recipeCollection = JSON.stringify(myRecipes)
+//       Recipe.sendToMyRecipes(recipeCollection)
+//       localStorage.savedRecipes = recipeCollection;
+//     } else {
+//       let clickedRecipe = JSON.stringify(recipeId)
+//       localStorage.savedRecipes = clickedRecipe
+//       Recipe.sendToMyRecipes(clickedRecipe)
+//     }
+//   })
+// }
+
 
 Recipe.search = ingredients => {
   $.get(`${__API_URL__}/recipes/search/${ingredients}`)
@@ -81,7 +156,13 @@ Recipe.retreiveIngredients = (recipeid) => {
     .catch(err => console.error(err))
 }
 
-$(document).ready(() => {
-  Recipe.buildSearch();
-  Recipe.showIngredients();
-})
+Recipe.sendToMyRecipes = (allRecipes) => {
+  $.ajax({
+    url: `${__API_URL__}/v1/users/${app.User.currentUser.user_id}`,
+    method: 'PUT',
+    data: {recipes: allRecipes},
+    success: function() {
+      console.log('allrecipes, send to dbase ', allRecipes)
+    }
+  })
+}
