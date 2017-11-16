@@ -115,8 +115,6 @@ Recipe.showIngredients = () => {
 
 
 
-<<<<<<< HEAD
-=======
 Recipe.addToMyRecipes = () => {
   $('#recipe-results').on('click', 'a.save-recipe', function() {
     console.log('save clicked');

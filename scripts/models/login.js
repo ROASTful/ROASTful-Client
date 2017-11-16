@@ -101,6 +101,7 @@ login.signIn = (user, pass) => {
       localStorage.user_id = userInfo.user_id;
       localStorage.pantry = userInfo.pantry;
       localStorage.recipes = userInfo.recipes;
+      ingredientView.initIndexPage();
     } else {
       $('#passwordPop').text('Incorrect Password or Username');
     }
