@@ -21,6 +21,12 @@ button:hover {
   background: #f7882f;
 }
 
+html {
+  border: solid 5px #B0B28F;
+  border-radius: 10px;
+  height: 100%;
+}
+
 body {
   background: #B0B28F;
   /*background: #B2A163;*/
@@ -59,6 +65,7 @@ h3{
 
 .main-div {
   background-color: #687a8f;
+  border-radius: 10px;
   margin: 2em auto;
   padding: 1.3em;
   width:85%;
