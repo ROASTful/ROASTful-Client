@@ -2,7 +2,7 @@
 var app = app || {};
 
 (function(module) {
-  
+
   const ingredientView = {};
 
   const render = function(recipe) {
@@ -18,7 +18,7 @@ ingredientView.initIndexPage=() => {
   $('#search-recipes').off('submit');
   $('.container').hide();
   $('#search-main').show();
-  $('#recipe-results').empty();
+  $('#recipe-results').show();
   app.Recipe.showIngredients();
   app.Recipe.buildSearch();
   app.Recipe.addToMyRecipes();
@@ -46,6 +46,11 @@ ingredientView.initPantryPage=() => {
 ingredientView.initRecipePage=() => {
   $('.container').hide();
   $('#recipe-main').show();
+  $('#recipe-list').empty();
+  if(app.User.currentUser.recipes){
+    console.log('recipes is is', app.User.currentUser.recipes);
+  app.User.currentUser.recipes.forEach(recipe =>app.Recipe.retrieveRecipes(recipe))
+  }
   // app.Recipe.showPantry();
 };
 
