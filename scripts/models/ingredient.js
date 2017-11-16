@@ -101,19 +101,29 @@ Recipe.addToMyRecipes = () => {
   $('#recipe-results').on('click', 'a.save-recipe', function(event) {
     event.preventDefault();
     let recipeId = $(this).data('recipeid')
-    if (localStorage.savedRecipes) {
-      let myRecipes = JSON.parse(localStorage.savedRecipes);
-      myRecipes.push(recipeId)
-      let recipeCollection = JSON.stringify(myRecipes)
-      Recipe.sendToMyRecipes(recipeCollection)
-      localStorage.savedRecipes = recipeCollection;
+    if (!app.User.currentUser.recipes) {
+      app.User.currentUser.recipes = [];
+    }
+    if (app.User.currentUser.recipes.includes(recipeId)) {
+      console.log('recipeId already exists')
     } else {
-      let clickedRecipe = JSON.stringify(recipeId)
-      localStorage.savedRecipes = clickedRecipe
-      Recipe.sendToMyRecipes(clickedRecipe)
+      app.User.currentUser.recipes.push(recipeId)
+      Recipe.sendToMyRecipes(app.User.currentUser.recipes)
     }
   })
 }
+//       let myRecipes = JSON.parse(localStorage.savedRecipes);
+//       myRecipes.push(recipeId)
+//       let recipeCollection = JSON.stringify(myRecipes)
+//       Recipe.sendToMyRecipes(recipeCollection)
+//       localStorage.savedRecipes = recipeCollection;
+//     } else {
+//       let clickedRecipe = JSON.stringify(recipeId)
+//       localStorage.savedRecipes = clickedRecipe
+//       Recipe.sendToMyRecipes(clickedRecipe)
+//     }
+//   })
+// }
 
 Recipe.search = ingredients => {
   $.get(`${__API_URL__}/recipes/search/${ingredients}`)
