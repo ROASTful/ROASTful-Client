@@ -1,9 +1,6 @@
 section#login {
-  border: #6B7A8F groove 2px;
   position: absolute;
-/*// ------------------------------------------------*/
-  top: 0;
-/*// -------------------------------------------------*/
+  border: #6B7A8F groove 2px;
   background-color: #F7882F;
   width: 100%;
   padding: 10px 10%;
@@ -60,6 +57,10 @@ input#password {
 
 #login #passwordPop {
   padding-top: 1vw;
+}
+
+#login h1 {
+    font-size: 6vw;
 }
 
 #login a {

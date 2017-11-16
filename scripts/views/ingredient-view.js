@@ -11,15 +11,22 @@ var app = app || {};
   };
 
 ingredientView.initIndexPage=() => {
+  $('#recipe-results').off('click');
   $('.recipes').off('click');
-    $('#addIngredient').off('click');
-    $('#search-recipes').off('submit');
+  $('#addIngredient').off('click');
+  $('#search-recipes').off('submit');
   $('.container').hide();
   $('#search-main').show();
   $('#recipe-results').empty();
   Recipe.showIngredients();
   Recipe.buildSearch();
   Recipe.addToMyRecipes();
+};
+
+ingredientView.initLoginPage=() => {
+  $('.container').hide();
+  $('#login').show();
+  // Recipe.showPantry();
 };
 
 ingredientView.initPantryPage=() => {
@@ -61,5 +68,5 @@ let myPantry = Handlebars.compile($('#pantry-template').html());
   $('#ingredient-list').append(myPantry(recipe));
 
 module.ingredientView = ingredientView;
-  
+
 })(app);
