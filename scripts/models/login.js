@@ -3,7 +3,6 @@
 var __API_URL__ = 'https://roastful.herokuapp.com';
 var Login = {};
 
-
 // ============= EVENT HANDLERS ============== //
 
 // ---- submit login ----
@@ -54,6 +53,24 @@ $('#login a').click(function(e) {
 
 // ============= LOGIN FUNCTIONS ============== //
 
+// returning users
+login.returningUser = () => {
+  console.log('welcome back');
+  $.get(`${__API_URL__}/v1/users/returning/${localStorage.user_id}`,)
+  .then(userInfo => {
+    console.table(userInfo);
+    if (userInfo) {
+      $('#login').hide(); // <---- TODO - once nav bar is set up (remove)
+      $('a[href="/login"]').text(`logout: ${userInfo.username}`);
+      localStorage.user_id = userInfo.user_id;
+      localStorage.pantry = userInfo.pantry;
+      localStorage.recipes = userInfo.recipes;
+    } else {
+      console.log('returning user failed');
+    }
+  })
+}
+
 // process login attempt
 login.register = (user, pass) => {
   console.log('processing registration request');
@@ -63,6 +80,7 @@ login.register = (user, pass) => {
       console.log('account created');
       $('#login').hide()
       $('a[href="/login"]').text(`${user}: Logout?`)
+      login.signIn(user, pass);
     } else {
       console.log('account exists');
       $('#userPop').text('That Username Already Exists');
@@ -80,6 +98,9 @@ login.signIn = (user, pass) => {
     if (userInfo) {
       $('#login').hide();
       $('a[href="/login"]').text(`logout: ${userInfo.username}`);
+      localStorage.user_id = userInfo.user_id;
+      localStorage.pantry = userInfo.pantry;
+      localStorage.recipes = userInfo.recipes;
     } else {
       $('#passwordPop').text('Incorrect Password or Username');
     }
@@ -112,7 +133,7 @@ login.validation = () => {
   }
   if (/[\W]/.test(password)) {
     // must contain [a-zA-Z0-9_]
-    $passValidation.text(`username can only include 'a-z', '0-9', and '_'`);
+    $passValidation.text(`password can only include 'a-z', '0-9', and '_'`);
     return;
   }
 
@@ -124,4 +145,8 @@ login.clear = () => {
   $('#userPop').empty();
   $('#passwordPop').empty();
   $('#userPop').css('padding', '0');
+}
+
+if (localStorage.user_id) {
+  login.returningUser();
 }
