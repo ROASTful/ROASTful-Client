@@ -22,6 +22,12 @@ ingredientView.initIndexPage=() => {
   Recipe.addToMyRecipes();
 };
 
+ingredientView.initLoginPage=() => {
+  $('.container').hide();
+  $('#login').show();
+  // Recipe.showPantry();
+};
+
 ingredientView.initPantryPage=() => {
   $('.container').hide();
   $('#pantry-main').show();
@@ -61,5 +67,5 @@ let myPantry = Handlebars.compile($('#pantry-template').html());
   $('#ingredient-list').append(myPantry(recipe));
 
 module.ingredientView = ingredientView;
-  
+
 })(app);
