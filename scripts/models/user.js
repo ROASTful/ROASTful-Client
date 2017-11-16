@@ -8,6 +8,7 @@ var __API_URL__ = 'https://roastful.herokuapp.com';
 
   function User(rawDataObj) {
     Object.keys(rawDataObj).forEach(key => this[key] = rawDataObj[key]);
+    this.recipes = JSON.parse(this.recipes);
   }
 
   User.currentUser;

@@ -97,16 +97,10 @@ login.signIn = (user, pass) => {
     if (userInfo) {
       $('#login').hide();
       $('a[href="/login"]').text(`logout: ${userInfo.username}`);
-<<<<<<< HEAD
       app.User.currentUser = new app.User(userInfo);
       console.log(app.User.currentUser);
       app.User.currentUser.password = null;
       localStorage.user_id = JSON.stringify(app.User.user_id);
-=======
-      localStorage.user_id = userInfo.user_id;
-      localStorage.pantry = userInfo.pantry;
-      localStorage.recipes = userInfo.recipes;
->>>>>>> origin/userObject-nicholasc
       app.ingredientView.initIndexPage();
     } else {
       $('#passwordPop').text('Incorrect Password or Username');

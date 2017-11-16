@@ -2,15 +2,6 @@
 
 var app = app || {};
 var __API_URL__ = 'https://roastful.herokuapp.com';
-<<<<<<< HEAD
-if(localStorage.user){
-  var userName = JSON.parse(localStorage.user);
-}
-if (localStorage.savedRecipes) {
-  var myRecipes = localStorage.savedRecipes
-}
-=======
->>>>>>> origin/userObject-nicholasc
 // var __API_URL__ = 'http://localhost:3000';
 
 function Recipe(rawDataObj) {
@@ -120,7 +111,6 @@ Recipe.showIngredients = () => {
 // }
 
 Recipe.addToMyRecipes = () => {
-<<<<<<< HEAD
   $('#recipe-results').on('click', 'a.save-recipe', function(event) {
     event.preventDefault();
     let recipeId = $(this).data('recipeid')
@@ -131,14 +121,8 @@ Recipe.addToMyRecipes = () => {
       console.log('recipeId already exists')
     } else {
       app.User.currentUser.recipes.push(recipeId)
-      Recipe.sendToMyRecipes(app.User.currentUser.recipes)
+      Recipe.sendToMyRecipes(JSON.stringify(app.User.currentUser.recipes))
     }
-=======
-  $('#recipe-results').on('click', 'a.save-recipe', function() {
-    console.log('save clicked');
-    // event.preventDefault();
-    Recipe.sendToMyRecipes($(this).data('recipeid'))
->>>>>>> origin/userObject-nicholasc
   })
 }
 //       let myRecipes = JSON.parse(localStorage.savedRecipes);
@@ -172,23 +156,13 @@ Recipe.retreiveIngredients = (recipeid) => {
     .catch(err => console.error(err))
 }
 
-<<<<<<< HEAD
 Recipe.sendToMyRecipes = (allRecipes) => {
-=======
-
-Recipe.sendToMyRecipes = (recipeid) => {
->>>>>>> origin/userObject-nicholasc
   $.ajax({
-    url: `${__API_URL__}/v1/users/${localStorage.user_id}`,
+    url: `${__API_URL__}/v1/users/${app.User.currentUser.user_id}`,
     method: 'PUT',
     data: {recipes: allRecipes},
     success: function() {
-<<<<<<< HEAD
       console.log('allrecipes, send to dbase ', allRecipes)
-=======
-      console.log(recipeid);
-      // page('/')
->>>>>>> origin/userObject-nicholasc
     }
   })
 }
