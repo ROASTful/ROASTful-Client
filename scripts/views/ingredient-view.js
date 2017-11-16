@@ -23,6 +23,12 @@ ingredientView.initIndexPage=() => {
   Recipe.addToMyRecipes();
 };
 
+ingredientView.initLoginPage=() => {
+  $('.container').hide();
+  $('#login').show();
+  // Recipe.showPantry();
+};
+
 ingredientView.initPantryPage=() => {
   $('.container').hide();
   $('#pantry-main').show();
