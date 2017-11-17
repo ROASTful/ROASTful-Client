@@ -49,7 +49,7 @@ input#password {
 }
 
 
-#login #userPop, #login #passwordPop {
+#userPop, #passwordPop {
   text-align: right;
   font-size: 3vw;
   color: #aa0000;
@@ -75,11 +75,12 @@ input#password {
 #full-ingredient-search {
   width: 100%;
   text-align: center;
+  font-size: 1.8em;
 }
 
 .icon-github {
   text-align:center;
-  padding-top: 1em;
+  padding: .4em;
   font-size: 1.4em;
   letter-spacing: 0em;
 }
@@ -92,4 +93,9 @@ input#password {
 
 #about-us h2 {
   text-decoration: black underline double;
+}
+
+#about-us img {
+  max-width: 100%;
+  padding-top:1em;
 }
