@@ -128,4 +128,11 @@ min-width: 40%;
   padding:.7em;
   text-align: center;
   width: 100%;
+  line-height: 1.8em;
+}
+
+.show-more {
+  margin: .5em 20% 0 20%;
+  padding: .3em 0
+  border-top: 5px solid #687a8f ;
 }
