@@ -76,3 +76,20 @@ input#password {
   width: 100%;
   text-align: center;
 }
+
+.icon-github {
+  text-align:center;
+  padding-top: 1em;
+  font-size: 1.4em;
+  letter-spacing: 0em;
+}
+
+#about-us h1 {
+  padding: 0 .25em;
+  border: 5px black solid;
+
+}
+
+#about-us h2 {
+  text-decoration: black underline double;
+}

@@ -2,7 +2,6 @@
 
 var app = app || {};
 var __API_URL__ = 'https://roastful.herokuapp.com';
-// var __API_URL__ = 'http://localhost:3000';
 
 (function(module) {
 
@@ -19,7 +18,7 @@ var __API_URL__ = 'https://roastful.herokuapp.com';
       method: 'PUT',
       data: user
     })
-      .then(() => {console.log('updated'); page('/')})
+      .then(() => page('/'))
       .catch(errorCallback);
   };
 
