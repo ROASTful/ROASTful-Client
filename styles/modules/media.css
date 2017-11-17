@@ -1,0 +1,75 @@
+@media only screen and (min-width: 710px) {
+  header {
+    background-color: #f7c331;
+    position: relative;
+  }
+
+  .icon-menu {
+    display: none;
+  }
+
+  section#login {
+    width: 500px;
+    padding: 60px;
+    padding-top: 0;
+    left: 50%;
+    transform: translate(-50%);
+  }
+
+  input#username {
+    font-size: 1.8em;
+  }
+
+  input#password {
+    font-size: 1.8em;
+  }
+
+  #login button {
+    font-size: 1.4em;
+    padding: 5px;
+    width: 60%;
+    margin: 10px auto;
+    margin-bottom: 20px;
+  }
+  #login h2 {
+    font-size: 2em;
+  }
+
+  #login a {
+    font-size: 1.4em;
+    right: 5px;
+    bottom: 5px;
+  }
+}
+
+@media only screen and (max-width: 709px) {
+  header {
+    background-color: #f7c331;
+    position: relative;
+  }
+
+  header h1 {
+    text-align: left;
+  }
+
+  .main-nav ul {
+    position: absolute;
+    background-color: #f7c331;
+    width: 100%;
+    display: none;
+    z-index: 50;
+  }
+
+  .main-nav ul li {
+    border-bottom: 1px solid black;
+    padding-bottom: 8px;
+    display: block;
+  }
+
+  .icon-menu {
+    position: absolute;
+    font-size: 4em;
+    right: 5vw;
+    top: 18px;
+  }
+}
