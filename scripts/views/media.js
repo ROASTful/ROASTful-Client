@@ -20,7 +20,7 @@ $(window).resize(function() {
 })
 
 $('html').click(function() {
-  $('#login').hide();
+  $('#login').slideUp();
 });
 
 // prevents click event functionality
