@@ -44,35 +44,20 @@ ingredientView.initAboutPage=() => {
 };
 
 ingredientView.initRecipePage=() => {
+  if(!app.User.currentUser){
+    page('/user/login');
+  }else{
   $('.container').hide();
   $('#recipe-main').show();
   $('#recipe-list').empty();
+  $('#recipe-main').empty();
   if(app.User.currentUser.recipes){
-    console.log('recipes is is', app.User.currentUser.recipes);
   app.User.currentUser.recipes.forEach(recipe =>app.Recipe.retrieveRecipes(recipe))
+}
   }
   // app.Recipe.showPantry();
 };
 
-var recipe = [];
-
-let myRecipies = Handlebars.compile($('#my-recipe-template').html());
-//  We can add this block if or when we add filters
-// ingredientView.populateFilters = function() {
-//     let template = Handlebars.compile($('#recipe-template').text());
-//     let options = app.Recipe.allRecipes().map(recipe => template({val: recipe}));
-//     if ($('#recipe-filter option').length < 2) {
-//       $('#recipe-filter').append(options);
-//     }
-//
-//     app.Recipe.allCategories(function(rows) {
-//       if ($('#recipe-filter option').length < 2) {
-//         $('#recipe-filter').append(rows.map(row => template({val: row.recipe})));
-//       }
-//     });
-//   };
-
-  $('#recipe-list').append(myRecipies(recipe));
 
 module.ingredientView = ingredientView;
 
