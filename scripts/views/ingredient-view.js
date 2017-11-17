@@ -19,6 +19,7 @@ ingredientView.initIndexPage=() => {
   $('.container').hide();
   $('#search-main').show();
   $('#recipe-results').show();
+  $('#about-us').hide();
   app.Recipe.showIngredients();
   app.Recipe.buildSearch();
   app.Recipe.addToMyRecipes();
@@ -37,10 +38,9 @@ ingredientView.initLoginPage=() => {
   }
 };
 
-ingredientView.initPantryPage=() => {
+ingredientView.initAboutPage=() => {
   $('.container').hide();
-  $('#pantry-main').show();
-  // app.Recipe.showPantry();
+  $('#about-us').show();
 };
 
 ingredientView.initRecipePage=() => {
@@ -57,7 +57,6 @@ ingredientView.initRecipePage=() => {
 var recipe = [];
 
 let myRecipies = Handlebars.compile($('#my-recipe-template').html());
-let myPantry = Handlebars.compile($('#pantry-template').html());
 //  We can add this block if or when we add filters
 // ingredientView.populateFilters = function() {
 //     let template = Handlebars.compile($('#recipe-template').text());
@@ -74,7 +73,6 @@ let myPantry = Handlebars.compile($('#pantry-template').html());
 //   };
 
   $('#recipe-list').append(myRecipies(recipe));
-  $('#ingredient-list').append(myPantry(recipe));
 
 module.ingredientView = ingredientView;
 
