@@ -8,10 +8,4 @@ page('/user/pantry', app.ingredientView.initPantryPage);
 page('/user/recipes', app.ingredientView.initRecipePage);
 page('/user/login', app.ingredientView.initLoginPage);
 
-
-// page('/recipe', '/');
-//
-// page('/pantry/:pantryName', app.ingredientController.loadByPantry, app.ingredientController.index);
-// page('/recipe/:recipeName', app.recipeController.loadByRecipe, app.ingredientController.index);
-
 page();
