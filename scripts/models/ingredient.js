@@ -11,10 +11,6 @@ function Recipe(rawDataObj) {
 
 Recipe.lastRecipeSaved;
 
-function Details(rawDataObj) {
-  Object.keys(rawDataObj).forEach(key => this[key] = rawDataObj[key]);
-}
-
 Recipe.all = [];
 Recipe.ingredientSearch = [];
 Recipe.builtSearch;
@@ -99,6 +95,7 @@ Recipe.showIngredients = () => {
 Recipe.addToMyRecipes = () => {
   $('#recipe-results').on('click', 'a.save-recipe', function(event) {
     event.preventDefault();
+    if(!app.User.currentUser){return page('/user/login')}
     let recipeId = $(this).data('recipeid')
     if (!app.User.currentUser.recipes) {
       app.User.currentUser.recipes = [];

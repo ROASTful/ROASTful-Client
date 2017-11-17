@@ -44,11 +44,16 @@ ingredientView.initPantryPage=() => {
 };
 
 ingredientView.initRecipePage=() => {
+  if(!app.User.currentUser){
+    page('/user/login');
+  }else{
   $('.container').hide();
   $('#recipe-main').show();
   $('#recipe-list').empty();
+  $('#recipe-main').empty();
   if(app.User.currentUser.recipes){
   app.User.currentUser.recipes.forEach(recipe =>app.Recipe.retrieveRecipes(recipe))
+}
   }
   // app.Recipe.showPantry();
 };
