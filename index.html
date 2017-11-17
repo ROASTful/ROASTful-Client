@@ -36,16 +36,18 @@
   </script>
 
   <script id="my-recipe-template" type="text/x-handlebars-template">
-      {{#with recipe}}
-        <h3><a href="{{source_url}}">{{title}}</a></h3>
-        {{/with}}
-        <ul>Ingredients
-        {{#each this}}
-          {{#ingredients}}
-          <li>{{this}}</li>
-          {{/ingredients}}
-        {{/each}}
-        </ul>
+    <section class="recipes">
+      <h3><a href="{{source_url}}">{{title}}</a></h3>
+      <img class="recipe-image" src="{{image_url}}">
+      <ul class="recipe-ingredients" data-recipeid="{{recipe_id}}">
+        <h2>Ingredients</h2>
+        {{#ingredients}}
+        <li>{{this}}</li>
+        {{/ingredients}}
+      </ul>
+
+      <a href="#" class="show-more" data-recipeid="{{recipe_id}}">Show ingredients &rarr;</a>
+    </section>
   </script>
 
   <script id="pantry-template" type="text/x-handlebars-template">
@@ -87,7 +89,7 @@
     </section>
   </header>
 
-  <div id="search-main" class="main-div clearfix container"/>
+  <div id="search-main" class="main-div clearfix">
     <div class="search-box">
       <h2>Search Recipes by Ingredient</h2>
       <form id="search-recipes">
@@ -96,60 +98,32 @@
         <button type="submit" id="submitIngredients">Search!</button>
       </form>
     </div>
+
   <label id="export-field" for="ingredient-search"/>
         <input type="text" readonly id="full-ingredient-search" val="">
 
     <!-- append recipes to this div -->
 
-    <div class="recipe-results" id="recipe-results">
+    <div class="recipe-results container" id="recipe-results">
 
     </div>
 
-   <!-- <div id="recipe-results">
-        <h3>Peanut Butter Sandwich</h3>
-        <ul>Ingredients
-          <li>Bread 2 slices</li>
-          <li>Peanut Butter</li>
-        </ul>
-        <ul>Directions
-        <li>Lay out the bread</li>
-        <li>Spread on Peanut Butter</li>
-        <li>Put slices of bread together, peanut buttered sides touching</li>
-        </ul>
-    </div> -->
-
-  <div id="pantry-main" class="main-div clearfix container">
+     <div id="pantry-main" class="main-div clearfix container">
 
 
 
     <!-- append recipes to this div -->
     <div id="ingredient-list">
       <h2>Pantry</h2>
-        <!-- <ul>
-          <li><input type="checkbox">Bread 2 slices</li>
-          <li><input type="checkbox">Peanut Butter</li>
-          <li><input type="checkbox">jelly</li>
-          <li><input type="checkbox">chocolate sauce</li>
-          <li><input type="checkbox">maple syrup</li>
-        </ul> -->
+        
     </div>
   </div>
 
   <div id="recipe-main" class="main-div clearfix container">
 
     <!-- append recipes to this div -->
+    <h2>My Recipes</h2>
     <div id="recipe-list">
-      <h2>My Recipes</h2>
-          <!--<h3>Peanut Butter Sandwich</h2>
-        <ul>Ingredients
-          <li>Bread 2 slices</li>
-          <li>Peanut Butter</li>
-        </ul>
-        <ul>Directions
-        <li>Lay out the bread</li>
-        <li>Spread on Peanut Butter</li>
-        <li>Put slices of bread together, peanut buttered sides touching</li>
-        </ul>-->
     </div>
   </div>
   </div>
