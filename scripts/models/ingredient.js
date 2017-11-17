@@ -53,12 +53,15 @@ Recipe.loadAllIngredients = rawData => {
 }
 
 Recipe.buildSearch = () => {
+  $('#submitIngredients').hide();
   $('#addIngredient').click(function(event) {
     event.preventDefault();
     Recipe.ingredientSearch.push($('#ingredient').val().replace(/\s+/g, '%20'));
     $('#export-field').show();
     $('#full-ingredient-search').val(Recipe.ingredientSearch.join(','));
     $('#ingredient').val('');
+    $('#submitIngredients').show();
+    $('#getLucky').hide();
   })
 
   $('#search-recipes').submit(function (event) {
@@ -69,6 +72,7 @@ Recipe.buildSearch = () => {
     Recipe.builtSearch = Recipe.ingredientSearch.join(',');
     Recipe.ingredientSearch = [];
     Recipe.search(Recipe.builtSearch);
+    $('#getLucky').show();
   })
 }
 
