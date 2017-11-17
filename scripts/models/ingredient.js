@@ -1,5 +1,6 @@
 'use strict';
-
+//TODO: put feedback in if you click save-recipe
+//TODO: only show search after clicking add
 var app = app || {};
 var __API_URL__ = 'https://roastful.herokuapp.com';
 
@@ -52,12 +53,15 @@ Recipe.loadAllIngredients = rawData => {
 }
 
 Recipe.buildSearch = () => {
+  $('#submitIngredients').hide();
   $('#addIngredient').click(function(event) {
     event.preventDefault();
     Recipe.ingredientSearch.push($('#ingredient').val().replace(/\s+/g, '%20'));
     $('#export-field').show();
     $('#full-ingredient-search').val(Recipe.ingredientSearch.join(','));
     $('#ingredient').val('');
+    $('#submitIngredients').show();
+    $('#getLucky').hide();
   })
 
   $('#search-recipes').submit(function (event) {
@@ -68,6 +72,7 @@ Recipe.buildSearch = () => {
     Recipe.builtSearch = Recipe.ingredientSearch.join(',');
     Recipe.ingredientSearch = [];
     Recipe.search(Recipe.builtSearch);
+    $('#getLucky').show();
   })
 }
 
@@ -93,19 +98,28 @@ Recipe.showIngredients = () => {
 }
 
 Recipe.addToMyRecipes = () => {
+  let $loginText = $('a[href="/user/login"]').text();
   $('#recipe-results').on('click', 'a.save-recipe', function(event) {
     event.preventDefault();
-    if(!app.User.currentUser){return page('/user/login')}
-    let recipeId = $(this).data('recipeid')
-    if (!app.User.currentUser.recipes) {
-      app.User.currentUser.recipes = [];
-    }
-    if (app.User.currentUser.recipes.includes(recipeId)) {
+
+    // true if logged in
+    if (/^logout/.test($loginText)) {
+      let recipeId = $(this).data('recipeid')
+      if (!app.User.currentUser.recipes) {
+        app.User.currentUser.recipes = [];
+      }
+      if (app.User.currentUser.recipes.includes(recipeId)) {
+        $(this).text('already saved');
+      } else {
+        app.User.currentUser.recipes.push(recipeId)
+        let recipeObj = new Recipe(Recipe.lastRecipeSaved);
+        Recipe.sendToMyRecipes(JSON.stringify(app.User.currentUser.recipes))
+        Recipe.saveToDatabase(recipeId, recipeObj);
+      }
     } else {
-      app.User.currentUser.recipes.push(recipeId)
-      let recipeObj = new Recipe(Recipe.lastRecipeSaved);
-      Recipe.sendToMyRecipes(JSON.stringify(app.User.currentUser.recipes))
-      Recipe.saveToDatabase(recipeId, recipeObj);
+      $('html').off('click');
+      $('#login').slideDown();
+      $(this).text('not logged in');
     }
   })
 }
@@ -130,7 +144,6 @@ Recipe.retrieveIngredients = (recipeid) => {
 Recipe.retrieveRecipes = (recipeid) => {
   $.get(`${__API_URL__}/db/recipes/${recipeid}`)
     .then(results => {
-      console.log(results);
       if(results){
       results.ingredients = JSON.parse(results.ingredients);
       let template = Handlebars.compile($('#my-recipe-template').html());
