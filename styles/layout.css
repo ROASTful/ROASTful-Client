@@ -80,7 +80,7 @@ input#password {
 
 .icon-github {
   text-align:center;
-  padding-top: 1em;
+  padding: .4em;
   font-size: 1.4em;
   letter-spacing: 0em;
 }
@@ -93,4 +93,9 @@ input#password {
 
 #about-us h2 {
   text-decoration: black underline double;
+}
+
+#about-us img {
+  max-width: 100%;
+  padding-top:1em;
 }
