@@ -11,6 +11,7 @@ $('#login button[name="login"]').click(function(e) {
   let password = $('#password').val();
   login.clear();
 
+  $('.recipes a.save-recipe').html('Save to My Recipes &#9745;');
   // TESTING VALIDATION
   if (!login.validation()) return;
 
@@ -24,6 +25,7 @@ $('#login button[name="register"]').click(function(e) {
   let password = $('#password').val();
   login.clear();
 
+  $('.recipes a.save-recipe').html('Save to My Recipes &#9745;')
   // TESTING VALIDATION
   if (!login.validation()) return;
 
