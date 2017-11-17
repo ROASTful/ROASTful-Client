@@ -57,6 +57,12 @@
     position: relative;
     min-height: 210px;
   }
+  #search-main {
+    min-width: 580px;
+  }
+  .recipe-results {
+    min-width: 560px;
+  }
 
   .recipes h3 {
     margin-left: 300px;
