@@ -132,7 +132,7 @@ Recipe.retrieveRecipes = (recipeid) => {
     .then(results => {
       console.log(results);
       if(results){
-      results.ingredients = results.ingredients;
+      results.ingredients = JSON.parse(results.ingredients);
       let template = Handlebars.compile($('#my-recipe-template').html());
       $('#recipe-main').append(template(results));
     }
