@@ -29,6 +29,7 @@ html {
 body {
   background: #B0B28F;
   /*background: #B2A163;*/
+  font-family: 'Noto Serif', serif;
 }
 
 div, nav {
@@ -37,6 +38,7 @@ div, nav {
 
 nav {
   background: #f7c331;
+  font-family: 'Patua One', cursive;
 }
 
 nav li {
@@ -60,6 +62,11 @@ h2 {
 h3{
   font-size: 1.5em;
   margin: .4em;
+}
+
+.main-nav ul {
+  max-width: 709px;
+  margin: 0 auto;
 }
 
 .main-div {
@@ -92,6 +99,7 @@ h3{
 }
 
 .main-div ul {
+
   font-size:1.3em;
   line-height: 1.2em;
   margin-left: .5em;
@@ -125,4 +133,11 @@ min-width: 40%;
   padding:.7em;
   text-align: center;
   width: 100%;
+  line-height: 1.8em;
+}
+
+.show-more {
+  margin: .5em 20% 0 20%;
+  padding: .3em 0
+  border-top: 5px solid #687a8f ;
 }

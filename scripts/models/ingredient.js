@@ -1,21 +1,16 @@
 'use strict';
-
+//TODO: put feedback in if you click save-recipe
+//TODO: only show search after clicking add
 var app = app || {};
 var __API_URL__ = 'https://roastful.herokuapp.com';
-// var __API_URL__ = 'http://localhost:3000';
 
 (function (module) {
-
 
 function Recipe(rawDataObj) {
   Object.keys(rawDataObj).forEach(key => this[key] = rawDataObj[key]);
 }
 
 Recipe.lastRecipeSaved;
-
-function Details(rawDataObj) {
-  Object.keys(rawDataObj).forEach(key => this[key] = rawDataObj[key]);
-}
 
 Recipe.all = [];
 Recipe.ingredientSearch = [];
@@ -80,10 +75,8 @@ Recipe.buildSearch = () => {
 Recipe.showIngredients = () => {
   $('.recipe-ingredients').hide();
   $('.recipes h2').hide();
-  // $('.recipe-image').hide();
   $('#recipe-results').on('click', 'a.show-more', function(event)
    {
-    console.log('clicked');
     event.preventDefault();
     if ($(this).text() === 'Show ingredients →') {
       if (!$(this).data('loaded')){
@@ -95,64 +88,28 @@ Recipe.showIngredients = () => {
       $(this).html('Hide ingredients &larr;');
     } else {
       $(this).html('Show ingredients &rarr;');
-      // $(this).parent().find('.recipe-image').hide();
       $(this).parent().find('.recipe-ingredients').hide();
     }
   })
 }
 
-
-// Recipe.showIngredients = () => {
-//   $('.recipe-image').hide();
-//   $('.recipe-ingredients').hide();
-//   $('.recipes').on('click', 'a.show-more', function(event) {
-//     event.preventDefault();
-//     if ($(this).text() === 'Show ingredients →') {
-//       if (!$(this).data('loaded')){
-//         Recipe.retrieveIngredients($(this).data('recipeid'))
-//         $(this).data('loaded', true);
-//       }
-//       $(this).parent().find('*').fadeIn();
-//       $(this).html('Hide ingredients &larr;');
-//     } else {
-//       $(this).html('Show ingredients &rarr;');
-//       $(this).parent().find('.recipe-image').hide();
-//       $(this).parent().find('.recipe-ingredients').hide();
-//     }
-//   })
-// }
-
 Recipe.addToMyRecipes = () => {
   $('#recipe-results').on('click', 'a.save-recipe', function(event) {
     event.preventDefault();
+    if(!app.User.currentUser){return page('/user/login')}
     let recipeId = $(this).data('recipeid')
     if (!app.User.currentUser.recipes) {
       app.User.currentUser.recipes = [];
     }
     if (app.User.currentUser.recipes.includes(recipeId)) {
-      console.log('recipeId already exists')
     } else {
       app.User.currentUser.recipes.push(recipeId)
-      console.log(Recipe.lastRecipeSaved);
       let recipeObj = new Recipe(Recipe.lastRecipeSaved);
       Recipe.sendToMyRecipes(JSON.stringify(app.User.currentUser.recipes))
       Recipe.saveToDatabase(recipeId, recipeObj);
     }
   })
 }
-//       let myRecipes = JSON.parse(localStorage.savedRecipes);
-//       myRecipes.push(recipeId)
-//       let recipeCollection = JSON.stringify(myRecipes)
-//       Recipe.sendToMyRecipes(recipeCollection)
-//       localStorage.savedRecipes = recipeCollection;
-//     } else {
-//       let clickedRecipe = JSON.stringify(recipeId)
-//       localStorage.savedRecipes = clickedRecipe
-//       Recipe.sendToMyRecipes(clickedRecipe)
-//     }
-//   })
-// }
-
 
 Recipe.search = ingredients => {
   $.get(`${__API_URL__}/recipes/search/${ingredients}`)
@@ -166,7 +123,6 @@ Recipe.retrieveIngredients = (recipeid) => {
   $.get(`${__API_URL__}/recipes/ingredient/${recipeid}`)
     .then(results => {
       Recipe.lastRecipeSaved = JSON.parse(results).recipe;
-      console.log(JSON.parse(results).recipe);
       Recipe.loadAllIngredients(JSON.parse(results).recipe);
     })
     .catch(err => console.error(err))
@@ -177,11 +133,9 @@ Recipe.retrieveRecipes = (recipeid) => {
     .then(results => {
       if(results){
       results.ingredients = JSON.parse(results.ingredients);
-      console.log(results);
       let template = Handlebars.compile($('#my-recipe-template').html());
       $('#recipe-main').append(template(results));
-    }else{console.log('no results' +results)}
-      // Recipe.loadAllIngredients(JSON.parse(results).recipe);
+    }
     })
     .catch(err => console.error(err))
 }
@@ -190,21 +144,14 @@ Recipe.sendToMyRecipes = (allRecipes) => {
   $.ajax({
     url: `${__API_URL__}/v1/users/${app.User.currentUser.user_id}`,
     method: 'PUT',
-    data: {recipes: allRecipes},
-    success: function() {
-      console.log('allrecipes, send to dbase ', allRecipes)
-    }
+    data: {recipes: allRecipes}
   })
 }
 Recipe.saveToDatabase = (recipeId, recipeObj) => {
-  console.log(recipeObj);
   $.ajax({
     url: `${__API_URL__}/db/recipes/${recipeId}`,
     method: 'POST',
-    data: recipeObj,
-    success: function() {
-      console.log('allrecipes, send to dbase ', recipeId)
-    }
+    data: recipeObj
   })
 }
 

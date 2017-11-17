@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/modules.css">
     <link rel="stylesheet" href="styles/modules/error-main.css">
+    <link rel="stylesheet" href="styles/modules/media.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif|Patua+One" rel="stylesheet">
 
   <!-- TEMPLATES -->
   <script id="error-template" type="text/x-handlebars-template">
@@ -20,7 +22,8 @@
   <!-- recipe template -->
   <script id="recipe-template" type="text/x-handlebars-template">
       <section class="recipes">
-        <h3><a href="{{source_url}}" target="_blank" >This will open &quot;{{title}}&quot; in a new tab</a></h3>
+        <h3><a href="{{source_url}}" target="_blank" >&quot;{{title}}&quot;</a></h3>
+        <p>Open in new tab</p>
         <img class="recipe-image" src="{{image_url}}">
         <ul class="recipe-ingredients" data-recipeid="{{recipe_id}}">
           <h2>Ingredients</h2>
@@ -50,35 +53,25 @@
     </section>
   </script>
 
-  <script id="pantry-template" type="text/x-handlebars-template">
-    <ul>
-      {{#each this}}
-        {{#ingredients}}
-        <li><input type="checkbox">{{this}}</li>
-        {{/ingredients}}
-      {{/each}}
-    </ul>
-  </script>
-
 </head>
 <body>
 
   <header>
     <!-- nav menu -->
+    <h1>ROASTful</h1>
+    <div class="icon-menu"></div>
     <nav class="main-nav">
-      <h1>ROASTful</h1>
-      <div class="icon-menu"></div>
       <ul>
         <li class="tab" data-content="login"><a href="/user/login"> Login/Register</a></li>
         <li class="tab" data-content="search"><a href="/"> Search Recipes</a></li>
-        <li class="tab admin" data-content="viewrecipelist"><a href="/user/recipes">My Recipes</a></li>
-        <li class="tab admin" data-content="viewpantry"><a href="/user/pantry">My Pantry</a></li>
+        <li class="tab admin" data-content="viewrecipelist"><a href="/user/recipes">My Recipes</a></li>\
+        <li class="tab admin" data-content="aboutus"><a href="/user/about">About Us</a></li>\
       </ul>
     </nav>
 
     <!-- login box -->
-    <section id="login" class="container">
-      <h1>Login</h1>
+    <section id="login">
+      <h2>Login</h2>
       <input id="username" type="text" name="user" placeholder="Username" maxlength="20">
       <p id="userPop"></p>
       <input id="password" type="password" name="pass" placeholder="Password" maxlength="16">
@@ -108,35 +101,30 @@
 
     </div>
 
-   <!-- <div id="recipe-results">
-        <h3>Peanut Butter Sandwich</h3>
-        <ul>Ingredients
-          <li>Bread 2 slices</li>
-          <li>Peanut Butter</li>
-        </ul>
-        <ul>Directions
-        <li>Lay out the bread</li>
-        <li>Spread on Peanut Butter</li>
-        <li>Put slices of bread together, peanut buttered sides touching</li>
-        </ul>
-    </div> -->
 
-  <div id="pantry-main" class="main-div clearfix container">
+  <div id="about-us" class="main-div clearfix container">
 
+    <h1>About Us</h1>
+      <h2>Nicholas Carignan</h2>
+      <img src="img/" alt="">
+      <p>Nicholas is a Full Stack Web Developer whose interest in code was sparked by a love for problem solving and a yearning to build. He has lived both as a teacher and law enforcement and neither satisfied his ambition to make a difference. Coding allows him to reach a wide audience and affect a more meaningful change.</p>
+      <a href="http://github.com/ncarignan" target="_blank" class="icon-github"> GitHub</a>
+      <h2>Matthew LeBlanc</h2>
+      <img src="img/" alt="">
+      <p>Matt is a former sous chef whose coding skills are as sharp as the knives he once loved.  While he doesn't sharpen those as much as he'd like, he spends plenty of time sharpening his Javascript full stack abilities.  Like a well-pepared stew, he brings all of the ingredients to the table.</p>
+      <a href="http://github.com/snobeard" target="_blank" class="icon-github">
+      GitHub</a>
+      <h2>Fred Rapp</h2>
+      <img src="img/" alt="">
+      <p>Fred is a formerly homeless, retired Navy K9 handler, currently self-employed as a handyman and am now working on becoming a savvy coder.</p>
+      <a href="http://github.com/FenrisWolfe" target="_blank" class="icon-github"> GitHub</a>
+      <h2>Kerry Nordstrom</h2>
+      <img src="img/" alt="">
+      <p>Kerry is a former bicycle mechanic whose daily tasks involved solving complicated problems with a series of simple solutions.  This desire to elegantly fix the squeaky wheel in the machine has led him to become a Javascript full stack developer. </p>
+      <a href="http://github.com/kerrynordstrom" target="_blank" class="icon-github"> GitHub</a>
 
-
-    <!-- append recipes to this div -->
-    <div id="ingredient-list">
-      <h2>Pantry</h2>
-        <!-- <ul>
-          <li><input type="checkbox">Bread 2 slices</li>
-          <li><input type="checkbox">Peanut Butter</li>
-          <li><input type="checkbox">jelly</li>
-          <li><input type="checkbox">chocolate sauce</li>
-          <li><input type="checkbox">maple syrup</li>
-        </ul> -->
     </div>
-  </div>
+
 
   <div id="recipe-main" class="main-div clearfix container">
 
