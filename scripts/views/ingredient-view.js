@@ -37,6 +37,7 @@ ingredientView.initLoginPage=() => {
     localStorage.clear();
     app.User.currentUser = null;
     $login.text(' Login/Register');
+    page('/')
   } else {
   $('#login').slideDown();
   }
