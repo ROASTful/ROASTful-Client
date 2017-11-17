@@ -1,5 +1,5 @@
 section#login {
-  position: absolute;
+  position: fixed;
   border: #6B7A8F groove 2px;
   background-color: #F7882F;
   width: 100%;
@@ -59,8 +59,9 @@ input#password {
   padding-top: 1vw;
 }
 
-#login h1 {
-    font-size: 6vw;
+#login h2 {
+  color: white;
+  font-size: 6vw;
 }
 
 #login a {
@@ -68,10 +69,27 @@ input#password {
   font-size: 5vw;
   right: 2vw;
   bottom: 2vw;
-  color: #6B7Aef;
+  color: white;
 }
 
 #full-ingredient-search {
   width: 100%;
   text-align: center;
+}
+
+.icon-github {
+  text-align:center;
+  padding-top: 1em;
+  font-size: 1.4em;
+  letter-spacing: 0em;
+}
+
+#about-us h1 {
+  padding: 0 .25em;
+  border: 5px black solid;
+
+}
+
+#about-us h2 {
+  text-decoration: black underline double;
 }

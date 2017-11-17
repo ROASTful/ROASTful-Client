@@ -9,7 +9,6 @@ var Login = {};
 $('#login button[name="login"]').click(function(e) {
   let username = $('#username').val();
   let password = $('#password').val();
-  console.log('login test');
   login.clear();
 
   // TESTING VALIDATION
@@ -23,7 +22,6 @@ $('#login button[name="login"]').click(function(e) {
 $('#login button[name="register"]').click(function(e) {
   let username = $('#username').val();
   let password = $('#password').val();
-  console.log('registration test');
   login.clear();
 
   // TESTING VALIDATION
@@ -55,16 +53,13 @@ $('#login a').click(function(e) {
 
 // returning users
 login.returningUser = () => {
-  console.log('welcome back');
   $.get(`${__API_URL__}/returning/${localStorage.user_id}`,)
   .then(userInfo => {
     if (userInfo) {
-      $('#login').hide(); // <---- TODO - once nav bar is set up (remove)
       $('a[href="/user/login"]').text(`logout: ${userInfo.username}`);
-      localStorage.user_id = userInfo.user_id;
-      localStorage.pantry = userInfo.pantry;
-      localStorage.recipes = userInfo.recipes;
-      console.log(`returning user ${userInfo.user_id}`);
+      app.User.currentUser = new app.User(userInfo);
+      app.User.currentUser.password = null;
+      localStorage.user_id = JSON.stringify(app.User.currentUser.user_id);
     } else {
     }
   })
@@ -72,15 +67,12 @@ login.returningUser = () => {
 
 // process login attempt
 login.register = (user, pass) => {
-  console.log('processing registration request');
   $.post(`${__API_URL__}/v1/users`, {username: user, password: pass})
   .then(result => {
     if (result === 'Created') {
-      console.log('account created');
       $('#login').hide()
       login.signIn(user, pass);
     } else {
-      console.log('account exists');
       $('#userPop').text('That Username Already Exists');
       $('#userPop').css('padding', '1vw 0');
     }
@@ -89,17 +81,14 @@ login.register = (user, pass) => {
 
 // process sign-in attempt
 login.signIn = (user, pass) => {
-  console.log('processing login request');
   $.get(`${__API_URL__}/v1/users/${user.toLowerCase()}/${pass}`,)
   .then(userInfo => {
-    console.table(userInfo);
     if (userInfo) {
       $('#login').hide();
       $('a[href="/user/login"]').text(`logout: ${userInfo.username}`);
       app.User.currentUser = new app.User(userInfo);
-      console.log(app.User.currentUser);
       app.User.currentUser.password = null;
-      localStorage.user_id = JSON.stringify(app.User.user_id);
+      localStorage.user_id = JSON.stringify(app.User.currentUser.user_id);
       app.ingredientView.initIndexPage();
     } else {
       $('#passwordPop').text('Incorrect Password or Username');
@@ -115,7 +104,6 @@ login.validation = () => {
   let password = $('#password').val();
 
   if (username.length <= 0) {
-    // console.log('requires username');
     $userValidation.css('padding', '1vw 0');
     $userValidation.text('requires username');
     return;
