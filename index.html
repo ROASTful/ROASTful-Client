@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/modules.css">
     <link rel="stylesheet" href="styles/modules/error-main.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif|Patua+One" rel="stylesheet">
 
   <!-- TEMPLATES -->
   <script id="error-template" type="text/x-handlebars-template">
@@ -51,16 +52,6 @@
     </section>
   </script>
 
-  <script id="pantry-template" type="text/x-handlebars-template">
-    <ul>
-      {{#each this}}
-        {{#ingredients}}
-        <li><input type="checkbox">{{this}}</li>
-        {{/ingredients}}
-      {{/each}}
-    </ul>
-  </script>
-
 </head>
 <body>
 
@@ -73,7 +64,7 @@
         <li class="tab" data-content="login"><a href="/user/login"> Login/Register</a></li>
         <li class="tab" data-content="search"><a href="/"> Search Recipes</a></li>
         <li class="tab admin" data-content="viewrecipelist"><a href="/user/recipes">My Recipes</a></li>
-        <li class="tab admin" data-content="viewpantry"><a href="/user/pantry">My Pantry</a></li>
+        <li class="tab admin" data-content="aboutus"><a href="/user/about">About Us</a></li>
       </ul>
     </nav>
 
@@ -109,16 +100,30 @@
 
     </div>
 
-     <div id="pantry-main" class="main-div clearfix container">
 
+  <div id="about-us" class="main-div clearfix container">
 
-
-    <!-- append recipes to this div -->
-    <div id="ingredient-list">
-      <h2>Pantry</h2>
+    <h1>About Us</h1>
+      <h2>Nicholas Carignan</h2>
+      <img src="img/" alt="">
+      <p>Nicholas is a Full Stack Web Developer whose interest in code was sparked by a love for problem solving and a yearning to build. He has lived both as a teacher and law enforcement and neither satisfied his ambition to make a difference. Coding allows him to reach a wide audience and affect a more meaningful change.</p>
+      <a href="http://github.com/ncarignan" target="_blank" class="icon-github"> GitHub</a>
+      <h2>Matthew LeBlanc</h2>
+      <img src="img/" alt="">
+      <p>Matt is a former sous chef whose coding skills are as sharp as the knives he once loved.  While he doesn't sharpen those as much as he'd like, he spends plenty of time sharpening his Javascript full stack abilities.  Like a well-pepared stew, he brings all of the ingredients to the table.</p>
+      <a href="http://github.com/snobeard" target="_blank" class="icon-github">
+      GitHub</a>
+      <h2>Fred Rapp</h2>
+      <img src="img/" alt="">
+      <p>Fred is a formerly homeless, retired Navy K9 handler, currently self-employed as a handyman and am now working on becoming a savvy coder.</p>
+      <a href="http://github.com/FenrisWolfe" target="_blank" class="icon-github"> GitHub</a>
+      <h2>Kerry Nordstrom</h2>
+      <img src="img/" alt="">
+      <p>Kerry is a former bicycle mechanic whose daily tasks involved solving complicated problems with a series of simple solutions.  This desire to elegantly fix the squeaky wheel in the machine has led him to become a Javascript full stack developer. </p>
+      <a href="http://github.com/kerrynordstrom" target="_blank" class="icon-github"> GitHub</a>
 
     </div>
-  </div>
+
 
   <div id="recipe-main" class="main-div clearfix container">
 

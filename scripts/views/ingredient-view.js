@@ -19,6 +19,7 @@ ingredientView.initIndexPage=() => {
   $('.container').hide();
   $('#search-main').show();
   $('#recipe-results').show();
+  $('#about-us').hide();
   app.Recipe.showIngredients();
   app.Recipe.buildSearch();
   app.Recipe.addToMyRecipes();
@@ -37,10 +38,9 @@ ingredientView.initLoginPage=() => {
   }
 };
 
-ingredientView.initPantryPage=() => {
+ingredientView.initAboutPage=() => {
   $('.container').hide();
-  $('#pantry-main').show();
-  // app.Recipe.showPantry();
+  $('#about-us').show();
 };
 
 ingredientView.initRecipePage=() => {
@@ -57,6 +57,7 @@ ingredientView.initRecipePage=() => {
   }
   // app.Recipe.showPantry();
 };
+
 
 module.ingredientView = ingredientView;
 

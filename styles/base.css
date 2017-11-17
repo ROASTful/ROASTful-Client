@@ -30,6 +30,7 @@ html {
 body {
   background: #B0B28F;
   /*background: #B2A163;*/
+  font-family: 'Noto Serif', serif;
 }
 
 div, nav {
@@ -38,6 +39,7 @@ div, nav {
 
 nav {
   background: #f7c331;
+  font-family: 'Patua One', cursive;
 }
 
 nav li {
