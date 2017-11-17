@@ -41,7 +41,7 @@
     right: 5px;
     bottom: 5px;
   }
-  
+
   .main-nav {
     text-align: center;
   }
@@ -54,15 +54,21 @@
     overflow: auto;
     text-align: center;
     margin-bottom: 10px;
+    position: relative;
+    min-height: 210px;
   }
 
   .recipes h3 {
+    margin-left: 300px;
     position: relative;
     display: inline-block;
   }
-
+  .recipes p {
+    margin-left: 300px;
+  }
   .recipes a.show-more {
     margin-top: 30px;
+    margin-right: 0;
   }
 
   .recipes a[data-recipeid] {
@@ -79,9 +85,15 @@
   }
 
   .recipes .recipe-image {
-    float: left;
+    position: absolute;
+    top: 0;
+    left: 0;
     min-width: 100px;
     max-width: 300px;
+  }
+
+  #userPop, #passwordPop {
+    font-size: 1.3em;
   }
 }
 

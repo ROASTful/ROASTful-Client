@@ -49,7 +49,7 @@ input#password {
 }
 
 
-#login #userPop, #login #passwordPop {
+#userPop, #passwordPop {
   text-align: right;
   font-size: 3vw;
   color: #aa0000;

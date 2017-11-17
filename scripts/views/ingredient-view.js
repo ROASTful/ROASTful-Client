@@ -26,6 +26,10 @@ ingredientView.initIndexPage=() => {
 };
 
 ingredientView.initLoginPage=() => {
+  $('html').off('click');
+  $('html').click(function() {
+    $('#login').slideUp();
+  });
   let $login = $('a[href="/user/login"]');
   let $loginText = $login.text();
 
