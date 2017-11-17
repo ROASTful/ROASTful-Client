@@ -111,6 +111,7 @@ Recipe.addToMyRecipes = () => {
       if (app.User.currentUser.recipes.includes(recipeId)) {
         $(this).text('already saved');
       } else {
+        $(this).text('recipe saved');
         app.User.currentUser.recipes.push(recipeId)
         let recipeObj = new Recipe(Recipe.lastRecipeSaved);
         Recipe.sendToMyRecipes(JSON.stringify(app.User.currentUser.recipes))
