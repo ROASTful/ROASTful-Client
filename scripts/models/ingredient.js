@@ -130,8 +130,9 @@ Recipe.retrieveIngredients = (recipeid) => {
 Recipe.retrieveRecipes = (recipeid) => {
   $.get(`${__API_URL__}/db/recipes/${recipeid}`)
     .then(results => {
+      console.log(results);
       if(results){
-      results.ingredients = JSON.parse(results.ingredients);
+      results.ingredients = results.ingredients;
       let template = Handlebars.compile($('#my-recipe-template').html());
       $('#recipe-main').append(template(results));
     }
