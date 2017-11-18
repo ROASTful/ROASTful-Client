@@ -118,7 +118,6 @@ Recipe.addToMyRecipes = () => {
         Recipe.saveToDatabase(recipeId, recipeObj);
       }
     } else {
-      $('html').off('click');
       $('#login').slideDown();
       $(this).text('not logged in');
     }

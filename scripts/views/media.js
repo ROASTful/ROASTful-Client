@@ -19,11 +19,9 @@ $(window).resize(function() {
   }
 })
 
-$('html').click(function() {
-  $('#login').slideUp();
-});
-
-// prevents click event functionality
-$('#login').click(function(event){
-    event.stopPropagation();
+$('html').click(function(e) {
+  // if (!nav-login) && (!login box) && (!data-recipeid)
+  if (!($(e.target).parent().data('content') === 'login') && !$(e.target).data('login') && !$(e.target).data('recipeid')) {
+    $('#login').slideUp();
+  }
 });
