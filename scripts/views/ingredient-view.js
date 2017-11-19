@@ -53,7 +53,7 @@ ingredientView.initRecipePage=() => {
   $('#recipe-list').empty();
   $('#recipe-main').empty();
   if(app.User.currentUser.recipes){
-  app.User.currentUser.recipes.forEach(recipe =>app.Recipe.retrieveRecipes(recipe))
+  app.User.currentUser.recipes.forEach(recipe => app.Recipe.retrieveRecipes(recipe))
 }
   }
   // app.Recipe.showPantry();

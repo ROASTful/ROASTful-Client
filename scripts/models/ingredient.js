@@ -3,6 +3,7 @@
 //TODO: only show search after clicking add
 var app = app || {};
 var __API_URL__ = 'https://roastful.herokuapp.com';
+// var __API_URL__ = 'http://localhost:3000';
 
 (function (module) {
 
