@@ -23,6 +23,10 @@ ingredientView.initIndexPage=() => {
   app.Recipe.showIngredients();
   app.Recipe.buildSearch();
   app.Recipe.addToMyRecipes();
+  $('#recipe-results').on('click', 'a.more-recipes', function() {
+    $('#recipe-results .recipes').fadeIn();
+    $('#recipe-results a.more-recipes').hide();
+  })
 };
 
 ingredientView.initLoginPage=() => {
