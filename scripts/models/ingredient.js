@@ -44,7 +44,6 @@ Recipe.showRecipes = () => {
   $('a.save-recipe').hide();
   $('#recipe-results').on('click', 'a.more-recipes', function() {
     $('#recipe-results .recipes').fadeIn();
-    $('a.save-recipe').fadeIn();
     $('#recipe-results a.more-recipes').hide();
   })
 }
