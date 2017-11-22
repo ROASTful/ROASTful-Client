@@ -1,6 +1,7 @@
 'use strict';
 
 var __API_URL__ = 'https://roastful.herokuapp.com';
+// var __API_URL__ = 'http://localhost:3000';
 var Login = {};
 
 // ============= EVENT HANDLERS ============== //

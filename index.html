@@ -75,15 +75,15 @@
     </nav>
 
     <!-- login box -->
-    <section id="login" class="container">
-      <h2>Login</h2>
-      <input id="username" type="text" name="user" placeholder="Username" maxlength="20">
-      <p id="userPop"></p>
-      <input id="password" type="password" name="pass" placeholder="Password" maxlength="16">
-      <p id="passwordPop"></p>
-      <button type="button" name="login">LOGIN</button>
-      <button type="button" name="register" style="display: none">REGISTER</button>
-      <a>register</a>
+    <section id="login" class="container" data-login="login">
+      <h2 data-login="login">Login</h2>
+      <input id="username" type="text" name="user" placeholder="Username" maxlength="20" data-login="login">
+      <p id="userPop" data-login="login"></p>
+      <input id="password" type="password" name="pass" placeholder="Password" maxlength="16" data-login="login">
+      <p id="passwordPop" data-login="login"></p>
+      <button type="button" name="login" data-login="login">LOGIN</button>
+      <button type="button" name="register" style="display: none" data-login="login">REGISTER</button>
+      <a data-login="login">register</a>
     </section>
   </header>
 
